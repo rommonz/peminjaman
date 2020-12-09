@@ -44,8 +44,8 @@
                 <li class="<?php echo $this->uri->segment(2) == 'formpemeliharaan' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('pemeliharaan/formpemeliharaan')?>"> <i class="menu-icon fa fa-car"></i>Pemeliharaan Asset</a>
                 </li>
-                <li class="<?php echo $this->uri->segment(2) == 'formpemeliharaan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('pemeliharaan/formpemeliharaan')?>"> <i class="menu-icon fa fa-file-o"></i>Peralatan & Perlengkapan</a>
+                <li class="<?php echo $this->uri->segment(2) == 'formpengajuanalat' ? 'active' : '' ?>">
+                    <a href="<?php echo site_url('peralatan/formpengajuanalat')?>"> <i class="menu-icon fa fa-file-o"></i>Peralatan & Perlengkapan</a>
                 </li>
                 <!-- li class="<?php echo $this->uri->segment(2) == 'kelaporan' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('Laporanbarang/kelaporan')?>"> <i class="menu-icon fa fa-print"></i>Laporan Peminjaman</a>
