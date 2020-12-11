@@ -26,6 +26,8 @@
                 <li class="<?php echo $this->uri->segment(2) == 'kebarang' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('barang/kebarang')?>"> <i class="menu-icon fa fa-tasks"></i>Daftar Barang</a>
                 </li>
+
+
                 <h3 class="menu-title">Manajemen </h3><!-- /.menu-title -->
                 <li class="<?php echo $this->uri->segment(2) == 'menejpinjamruangan' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('pinjam/menejpinjamruangan')?>"> <i class="menu-icon fa fa-file-o"></i>Manajemen Ruangan</a>

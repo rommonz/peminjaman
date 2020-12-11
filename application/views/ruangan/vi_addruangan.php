@@ -10,15 +10,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 
 <body>
-
-
         <!-- Left Panel -->
 
         <?php $this->load->view('menu') ?>
       <!-- #Left Panel -->
-
-
-
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
@@ -26,11 +21,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <div class="header-menu">
 
-                <div class="col-sm-7">
-                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
-                    <div class="header-left">
-                    <h3>Barang</h3>
-                    </div>
+            <div class="col-sm-7">
+                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
+                <div class="header-left">
+                <h3><?php echo strtoupper($this->uri->segment(1)) ?></h3>
+            </div>
 				</div>
 			</div>
         </header><!-- /header -->
@@ -38,46 +33,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="container">
                     <div class="card">
                       <div class="card-header">
-                        <strong>Tambah Barang</strong>
+                        <strong>Tambah Ruangan</strong>
                       </div>
                       <div class="card-body card-block">
-                        <form action="<?php echo site_url('barang/save'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <form action="<?php echo site_url('ruangan/save'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
 
                           <div class="row form-group">
-                                <div class="col col-md-3"><label for="kd" class=" form-control-label">Kode Barang</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="kd" name="kd" placeholder="Kode Barang" class="form-control" required></div>
+                                <div class="col col-md-3"><label for="kd" class=" form-control-label">Kode Ruangan</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="kr" name="kr" placeholder="Kode Ruangan" class="form-control" required></div>
                           </div>
 
                           <div class="row form-group">
-                               <div class="col col-md-3"><label for="nb" class=" form-control-label">Nama Barang</label></div>
-                               <div class="col-12 col-md-9"><input type="text" id="nb" name="nb" placeholder="Nama Barang" class="form-control" required></div>
+                               <div class="col col-md-3"><label for="nb" class=" form-control-label">Nama Ruangan</label></div>
+                               <div class="col-12 col-md-9"><input type="text" id="nr" name="nr" placeholder="Nama Ruangan" class="form-control" required></div>
                           </div>
 
                           <div class="row form-group">
-                               <div class="col col-md-3"><label for="merk" class=" form-control-label">Merk/Type</label></div>
-                               <div class="col-12 col-md-9"><input type="text" id="merk" name="merk" placeholder="Merk/Type" class="form-control" required></div>
+                               <div class="col col-md-3"><label for="merk" class=" form-control-label">Kapasitas</label></div>
+                               <div class="col-12 col-md-9"><input type="number" id="kapasitas" name="kapasitas" placeholder="Kapasitas" class="form-control" required></div>
                           </div>
-
                           <div class="row form-group">
-                               <div class="col col-md-3"><label for="ns" class=" form-control-label">No Seri</label></div>
-                               <div class="col-12 col-md-9"><input type="text" id="ns" name="ns" placeholder="No Seri" class="form-control" required></div>
-                          </div>
-
-                          <div class="row form-group"> <!--dibuat dropdown-->
-                            <div class="col col-md-3">
-                               <label class="form-control-label" for="kb">Kondisi Barang</label>
-                            </div>
-                               <div class="col-12 col-md-9">
-                                    <select id="kb" class="form-control" name="kb">
-                                    <option value="Baik">Baik</option>
-                                    <option value="Sedikit Rusak">Sedikit Rusak</option>
-                                    </select>
-                                </div>
-                          </div>
-
-                          <div class="row form-group">
-                            <div class="col col-md-3"><label for="unit" class=" form-control-label">Unit</label></div>
-                            <div class="col-12 col-md-9"><input type="number" min="1" id="unit" name="unit" placeholder="Unit" class="form-control" required></div>
+                            <div class="col col-md-3"><label for="keterangan" class=" form-control-label">Keterangan</label></div>
+                            <div class="col-12 col-md-9"><input type="text" min="1" id="keterangan" name="keterangan" placeholder="Keterangan" class="form-control" required></div>
                           </div>
 
                           <div class="row form-group">
@@ -87,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                       <div class="card-footer">
                         <input type="submit" class="btn btn-primary btn-sm" name="save" value="Save"/>
-                        <a class="btn btn-secondary btn-sm" href="<?php echo site_url('barang/kebarang')?>" role="button">Kembali</a>
+                        <a class="btn btn-secondary btn-sm" href="<?php echo site_url('ruangan/daftarruangan')?>" role="button">Kembali</a>
                       </div>
 					  </form>
                     </div>

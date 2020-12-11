@@ -87,19 +87,16 @@ INSERT INTO `pinjam_ruangan` (`id_pinjam_ruangan`, `id_ruangan`, `tgl_pinjam`, `
 --
 
 CREATE TABLE `ruangan` (
-  `id_ruangan` int(11) NOT NULL,
-  `kode_barang` varchar(45) DEFAULT NULL,
+  `id_ruangan` int(11) NOT NULL AUTO_INCREMENT,
+  `kode_ruangan` varchar(45) DEFAULT NULL,
   `nama_ruangan` varchar(100) DEFAULT NULL,
-  `keterangan` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `kapasitas` int(11) DEFAULT NULL,
+  `keterangan` text,
+  PRIMARY KEY (`id_ruangan`),
+  UNIQUE KEY `kode_ruangan_UNIQUE` (`kode_ruangan`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ruangan`
---
-
-INSERT INTO `ruangan` (`id_ruangan`, `kode_barang`, `nama_ruangan`, `keterangan`) VALUES
-(1, 'AULA1', 'AULA DINKES', '-');
-
 -- --------------------------------------------------------
 
 --

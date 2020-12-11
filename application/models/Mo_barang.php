@@ -28,17 +28,10 @@ class Mo_barang extends CI_Model{
             $this->db->insert($barang,$data);
     }
 
-   // function getBarang($id)
-    //{
-    //    $this->db->where('id_barang',$id);
-    //    $this->db->select("*");
-    //    $this->db->from("tb_barang");
-    //    return $this->db->get();
-    //}
-
     function edit_barang($where,$table){
         return $this->db->get_where($table,$where);
     }
+    
     function updatebarang($where,$data,$table)
     {
        $this->db->where($where);

@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
                     <div class="header-left">
-                    <h3>Dashboard</h3>
+                    <h3><?php echo strtoupper($this->uri->segment(1)) ?></h3>
                     </div>
 				</div>
 			</div>
@@ -43,16 +43,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <strong class="card-title">Daftar Ruangan</strong>
                         </div>
                         <div class="card-header">
-                        <a class="btn btn-primary btn-sm" href="<?php echo site_url('barang/add') ?>" ><i class="fa fa-pencil"></i> Add New</a>
+                        <a class="btn btn-primary btn-sm" href="<?php echo site_url('ruangan/add') ?>" ><i class="fa fa-pencil"></i> Add New</a>
                         </div>
 
                  <div class="card-body">
+                   <?php echo $this->session->flashdata ? $this->session->flashdata('inpo')->msg : ""?>
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                         <tr>
 
-                        <th>Kode Barang</th>
+                        <th>Kode Ruangan</th>
                         <th>Nama Ruangan</th>
+                        <th>Kapasitas</th>
                         <th>Fasilitas</th>
                         <th>Keterangan</th>
                         <th>Action</th>
@@ -60,24 +62,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </thead>
                     <tbody>
 						<?php
+            if(sizeof($daftar_ruangan) < 1){
+              echo "<tr><td colspan='6' align='center'>Data Tidak Tersedia</td></tr>";
+            }else{
 						foreach($daftar_ruangan as $rg){
 						?>
 						<tr>
 
-						<td><?php echo $rg->kode_barang ?></td>
+						<td><?php echo $rg->kode_ruangan ?></td>
 						<td><?php echo $rg->nama_ruangan ?></td>
+            <td><?php echo $rg->kapasitas ?></td>
             <td>
 
             </td>
 						<td><?php echo $rg->keterangan ?></td>
             <td>
-              <a class="btn btn-success btn-sm" href="<?php echo site_url('barang/detail/'.$rg->id_ruangan);?>"class="btn btn-small"><i class="fa fa-info-circle"></i>Detail</a>
-              <a class="btn btn-warning btn-sm" href="<?php echo site_url('barang/edit/'.$rg->id_ruangan);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
+              <a class="btn btn-warning btn-sm" href="<?php echo site_url('ruangan/edit/'.$rg->id_ruangan);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
               <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $rg->id_ruangan; ?>" onclick="confirm_modal('<?php echo site_url('ruangan/hapus/'.$rg->id_ruangan);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
 						</td>
 						</tr>
 
-						<?php } ?>
+          <?php }} ?>
                     </tbody>
                 </table>
 				</div>
