@@ -25,25 +25,27 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `barang`
 --
-
 CREATE TABLE `barang` (
-  `id_barang` int(11) NOT NULL,
+  `id_barang` int(11) NOT NULL AUTO_INCREMENT,
   `kode_barang` varchar(50) DEFAULT NULL,
   `nama_barang` varchar(50) NOT NULL,
   `merk` varchar(50) NOT NULL,
   `no_seri` varchar(50) DEFAULT NULL,
   `kondisi_barang` varchar(50) NOT NULL,
-  `id_ruangan` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id_ruangan` int(11) NOT NULL,
+  `foto` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_barang`),
+  KEY `id_barang` (`id_barang`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `kode_barang`, `nama_barang`, `merk`, `no_seri`, `kondisi_barang`, `id_ruangan`) VALUES
-(1, '3060324005-', 'spektrum analyzer', 'anritsu ms 2720t', '1536028', 'Baik', 1),
-(2, '3060324005', 'antena dipole', 'anritsu mp534b', '', 'baik', 1),
-(3, 'gps123', 'gps garmin', 'montana 680', '30303010726', 'Baik', 1);
+INSERT INTO `barang` (`id_barang`, `kode_barang`, `nama_barang`, `merk`, `no_seri`, `kondisi_barang`, `id_ruangan`,`foto`) VALUES
+(1, '3060324005-', 'spektrum analyzer', 'anritsu ms 2720t', '1536028', 'Baik', 1,NULL),
+(2, '3060324005', 'antena dipole', 'anritsu mp534b', '', 'baik', 1,NULL),
+(3, 'gps123', 'gps garmin', 'montana 680', '30303010726', 'Baik', 1,NULL);
 
 -- --------------------------------------------------------
 

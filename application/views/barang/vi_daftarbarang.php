@@ -47,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
 
                  <div class="card-body">
-                  <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                  <table id="tabel-barang" class="table table-striped table-bordered">
                     <thead>
                         <tr>
 
@@ -72,8 +72,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<td><?php echo $br->merk ?></td>
 						<td><?php echo $br->no_seri ?></td>
 						<td><?php echo $br->kondisi_barang ?></td>
-						<td><?php echo $br->id_ruangan ?></td>
-            <td>photo</td>
+						<td><?php echo $br->kode_ruangan ?></td>
+            <td><img src="<?php echo base_url('assets/uploads/'.$br->foto) ?>" width="100" alt="foto barang"></td>
             <td>
               <a class="btn btn-warning btn-sm" href="<?php echo site_url('barang/edit/'.$br->id_barang);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
               <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $br->id_barang; ?>" onclick="confirm_modal('<?php echo site_url('barang/hapus/'.$br->id_barang);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
@@ -134,6 +134,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url('assets/js/lib/vector-map/jquery.vmap.sampledata.js');?>"></script>
     <script src="<?php echo base_url('assets/js/lib/vector-map/country/jquery.vmap.world.js');?>"></script>
     <script>
+      $(document).ready(function(){
+        $("#tabel-barang").datatable();
+      })
+    </script>
+    <script>
+    /*
         ( function ( $ ) {
             "use strict";
 
@@ -150,6 +156,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 normalizeFunction: 'polynomial'
             } );
         } )( jQuery );
+        */
     </script>
 
 </body>

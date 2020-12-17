@@ -75,9 +75,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
                           </div>
 
+                          <div class="row form-group"> <!--dibuat dropdown-->
+                            <div class="col col-md-3">
+                               <label class="form-control-label" for="kb">Ruangan</label>
+                            </div>
+                               <div class="col-12 col-md-9">
+                                    <select id="id_ruangan" class="form-control" name="id_ruangan">
+                                    <option></option>
+                                    <?php if(sizeof($ruangan) > 0) : ?>
+                                      <?php foreach($ruangan as $r): ?>
+                                        <option value="<?php echo $r->id_ruangan ?>"><?php echo $r->kode_ruangan ?></option>
+                                      <?php endforeach; ?>
+                                    <?php endif; ?>
+                                    </select>
+                                </div>
+                          </div>
+
                           <div class="row form-group">
-                            <div class="col col-md-3"><label for="unit" class=" form-control-label">Unit</label></div>
-                            <div class="col-12 col-md-9"><input type="number" min="1" id="unit" name="unit" placeholder="Unit" class="form-control" required></div>
+                            <div class="col col-md-3"><label for="foto" class=" form-control-label">Foto</label></div>
+                            <div class="col-12 col-md-9"><input type="file"  id="foto" name="foto" placeholder="foto" class="form-control" ></div>
                           </div>
 
                           <div class="row form-group">

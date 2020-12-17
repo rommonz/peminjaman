@@ -17,7 +17,7 @@ class Ruangan extends CI_Controller{
   }
 
   function save(){
-    if($this->input->post('save')){
+    
       $data = array('kode_ruangan'=>$this->input->post('kr'),
                     'nama_ruangan'=>$this->input->post('nr'),
                     'kapasitas'=>$this->input->post('kapasitas'),
