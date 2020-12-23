@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
                     <div class="header-left">
-                    <h3>Dashboard</h3>
+                    <h3>Barang</h3>
                     </div>
 				</div>
 			</div>

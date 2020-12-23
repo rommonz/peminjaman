@@ -1,4 +1,4 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ruangan extends CI_Controller{
 
@@ -7,7 +7,14 @@ class Ruangan extends CI_Controller{
     $this->load->model('mo_ruangan');
   }
 
+  function index(){
+
+  }
+
   function daftarruangan(){
+    //echo "<pre/>";
+    //print_r($this->session->userdata());
+
     $data['daftar_ruangan'] = $this->mo_ruangan->get_daftarruangan();
     $this->load->view('ruangan/vi_ruangan',$data);
   }
@@ -17,22 +24,18 @@ class Ruangan extends CI_Controller{
   }
 
   function save(){
-    
-      $data = array('kode_ruangan'=>$this->input->post('kr'),
-                    'nama_ruangan'=>$this->input->post('nr'),
-                    'kapasitas'=>$this->input->post('kapasitas'),
-                    'keterangan'=>$this->input->post('keterangan')
-                  );
-      if($this->mo_ruangan->simpan_ruangan($data)){
+
+    $data = array('kode_ruangan'=>$this->input->post('kr'),
+                  'nama_ruangan'=>$this->input->post('nr'),
+                  'kapasitas'=>$this->input->post('kapasitas'),
+                  'keterangan'=>$this->input->post('keterangan')
+                );
+    if($this->mo_ruangan->simpan_ruangan($data)){
         //set flasdata berhasil
         redirect('ruangan/daftarruangan','refresh');
       }else{
         //set flashdata gagal{
         redirect('ruangan/add');
-      }
-
-    }else{
-      redirect('ruangan/add','refresh');
     }
   }
 

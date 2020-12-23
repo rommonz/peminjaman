@@ -33,13 +33,13 @@ class Mo_barang extends CI_Model{
     }
 
     function edit_barang($where,$table){
-        return $this->db->get_where($table,$where);
+        return $this->db->get_where($this->_table,$where);
     }
 
-    function updatebarang($where,$data,$table)
+    function updatebarang($where,$data)
     {
        $this->db->where($where);
-       $this->db->update ('tb_barang',$data);
+       $this->db->update ('barang',$data);
     }
 
     function hapus_barang($where,$table){

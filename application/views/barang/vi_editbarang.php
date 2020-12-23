@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
                     <div class="header-left">
-                    <h3>Dashboard</h3>
+                    <h3>Barang</h3>
                     </div>
 				</div>
 			</div>
@@ -37,16 +37,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
                     <div class="card">
                       <div class="card-header">
-                        <strong>Tambah Barang</strong>
+                        <strong>Edit Data Barang</strong>
                       </div>
                       <div class="card-body card-block">
-                        <?php
-                            foreach($tb_barang as $detail){
-                        ?>
+                        <form action="<?php echo site_url('barang/updatebarang'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
 
-                        <form action="<?php echo site_url('crudbarang/updatebarangDb'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
-
-
+                          <div class="row">
+                            <div class="col-md-9">
                           <div class="row form-group">
                                 <div class="col col-md-3"><label for="kd" class=" form-control-label">Kode Barang</label></div>
                                 <div class="col-12 col-md-9"><input type="text" id="kd" name="kd" value="<?php echo $detail->kode_barang; ?>" class="form-control" required></div>
@@ -80,26 +77,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
                           </div>
 
+                          <div class="row form-group"> <!--dibuat dropdown-->
+                            <div class="col col-md-3">
+                               <label class="form-control-label" for="kb">Ruangan </label>
+                            </div>
+                               <div class="col-12 col-md-9">
+                                    <select id="id_ruangan" class="form-control" name="id_ruangan">
+                                    <option></option>
+                                    <?php if(sizeof($ruangan) > 0) : ?>
+                                      <?php foreach($ruangan as $r): ?>
+                                        <option <?php echo $r->id_ruangan == $detail->id_ruangan ? 'selected' : '' ?> value="<?php echo $r->id_ruangan ?>"><?php echo $r->kode_ruangan ?></option>
+                                      <?php endforeach; ?>
+                                    <?php endif; ?>
+                                    </select>
+                                </div>
+                          </div>
+
                           <div class="row form-group">
-                            <div class="col col-md-3"><label for="unit" class=" form-control-label">Unit</label></div>
-                            <div class="col-12 col-md-9"><input type="number" min="0" id="unit" name="unit" value="<?php echo $detail->unit; ?>" class="form-control" required></div>
+                            <div class="col col-md-3"><label for="foto" class=" form-control-label">Foto</label></div>
+                            <div class="col-12 col-md-9"><input type="file"  id="foto" name="foto" placeholder="foto" class="form-control" ></div>
                           </div>
 
                           <div class="row form-group">
                           </div>
 
-                      </div>
+
 
                       <div class="card-footer">
-                        <input type="submit" class="btn btn-primary btn-sm" value="Update"/>
-                        <a class="btn btn-secondary btn-sm" href="<?php echo site_url('barang/kebarang')?>" role="button">Kembali</a>
+                        <input type="submit" class="btn btn-primary btn-sm" name="update" value="Update"/>
+                        <a class="btn btn-secondary btn-sm" href="<?php echo site_url('barang/daftarbarang')?>" role="button">Kembali</a>
                       </div>
-                        </form>
-                        <?php
-                            }
-                        ?>
-                    </div>
 
+                    </div>
+                    <div class="col-md-3">
+                      <img src="<?php echo base_url('assets/uploads/'.$detail->foto) ?>" width="300" alt="foto barang">
+                    </div>
+                    </div>
+                        </form>
+                    </div>
 
                     </div>
                   </div>

@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$this->session->userdata('nama') ? $user = $this->session->userdata('nama'):redirect('login/masuk','refresh'); 
 ?>
 
 <script type="text/javascript"></script>

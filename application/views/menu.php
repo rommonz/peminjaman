@@ -23,8 +23,8 @@
                 <li class="<?php echo $this->uri->segment(2) == 'daftarruangan' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('ruangan/daftarruangan')?>"> <i class="menu-icon fa fa-building"></i>Daftar Ruangan</a>
                 </li>
-                <li class="<?php echo $this->uri->segment(2) == 'kebarang' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('barang/kebarang')?>"> <i class="menu-icon fa fa-tasks"></i>Daftar Barang</a>
+                <li class="<?php echo $this->uri->segment(2) == 'daftarbarang' ? 'active' : '' ?>">
+                    <a href="<?php echo site_url('barang/daftarbarang')?>"> <i class="menu-icon fa fa-tasks"></i>Daftar Barang</a>
                 </li>
 
 
