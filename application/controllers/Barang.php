@@ -31,7 +31,7 @@ class Barang extends CI_Controller{
     function save(){
     	if($this->input->post('save')){
 
-					$config['upload_path']          = './assets/uploads/';
+					$config['upload_path']          = FCPATH.'assets/uploads/';
 					$config['allowed_types']        = 'gif|jpg|png';
 					$config['max_size']             = 100;
 					$config['max_width']            = 1024;
@@ -79,7 +79,7 @@ class Barang extends CI_Controller{
     {
 			if($this->input->post('update')){
 				if (!empty($_FILES['foto']['name'])) {
-					$config['upload_path']          = './assets/uploads/';
+					$config['upload_path']          = FCPATH.'assets/uploads/';
 					$config['allowed_types']        = 'gif|jpg|png';
 					$config['overwrite'] 					= TRUE;
 					$config['max_size']             = 100;
