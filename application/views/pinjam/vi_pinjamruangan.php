@@ -48,11 +48,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Ruangan</label></div>
                             <div class="col-12 col-md-9">
-                              <select class="form-control" required>
+                              <select name="ruangan" id="ruangan" class="form-control" required>
                                 <option></option>
                                 <?php foreach($listruangan as $ruang){ ?>
                                 <option
-                                  <?php echo $this->uri->segment(3) == $ruang->id_ruangan ? 'selected' : '' ?>                                
+                                  <?php echo $this->uri->segment(3) == $ruang->id_ruangan ? 'selected' : '' ?>
                                   value="<?php echo $ruang->id_ruangan ?>"><?php echo $ruang->kode_ruangan ?>
                                 </option>
                               <?php } ?>

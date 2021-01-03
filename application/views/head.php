@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$this->session->userdata('nama') ? $user = $this->session->userdata('nama'):redirect('login/masuk','refresh'); 
+$this->session->userdata('nama') ? $user = $this->session->userdata('nama'):redirect('login/masuk','refresh');
 ?>
 
 <script type="text/javascript"></script>
@@ -20,8 +20,8 @@ $this->session->userdata('nama') ? $user = $this->session->userdata('nama'):redi
 <link rel="stylesheet" href="<?php echo base_url('assets/css/cs-skin-elastic.css')?>">
 <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
 <link rel="stylesheet" href="<?php echo base_url('assets/scss/style.css')?>">
-<link href="<?php echo base_url('assets/css/lib/vector-map/jqvmap.min.css')?>" rel="stylesheet">
+<!-- link href="< ?php echo base_url('assets/css/lib/vector-map/jqvmap.min.css')?>" rel="stylesheet" -->
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>
+<!-- script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script -->

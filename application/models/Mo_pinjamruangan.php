@@ -16,9 +16,11 @@ class Mo_pinjamruangan extends CI_Model{
 	}
 	function get_list($id_ruangan = NULL){
 		//echo "id ruangan ".$id_ruangan; exit;
-		$sql = "select * from calendar c
+		$sql = "select c.*, r.kode_ruangan, r.nama_ruangan,
+						IF(c.approval = 'APPROVED', 'GREEN',IF(c.approval = 'PENDING','YELLOW','RED')) as color
+						from calendar c
 						inner join ruangan r on r.id_ruangan = c.id_ruangan
-						where c.approval = 'APPROVED'
+
 						";
 	if(isset($id_ruangan)){
 		$sql .= " and c.id_ruangan = ".$id_ruangan;
@@ -82,11 +84,14 @@ class Mo_pinjamruangan extends CI_Model{
         $this->db->delete($table);
 	}
 
-	function get_daftarpinjamruangan($approval = 'PENDING'){
-		$sql = "select * from pinjam_ruangan pr
-						inner join ruangan on ruangan.id_ruangan = pr.id_ruangan
-						inner join tbl_login on pr.id_peminjam = tbl_login.id
+	function get_daftarpinjamruangan($where = NULL){
+		$sql = "select * from calendar c
+						inner join ruangan on ruangan.id_ruangan = c.id_ruangan
+						where start_date > '2020-01-01'
 						";
+		if(isset($where)){
+			$sql .= $where;
+		}
 		return $this->db->query($sql)->result();
 	}
 }

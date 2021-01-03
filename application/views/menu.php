@@ -17,7 +17,7 @@
                     <a href="<?php echo site_url('admin/index')?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard</a>
                 </li>
                 <?php if($this->session->userdata('role') <= 2) : ?>
-                <h3 class="menu-title">Admin </h3><!-- /.menu-title -->
+                <h3 class="menu-title">Master </h3><!-- /.menu-title -->
                 <li class="<?php echo $this->uri->segment(2) == 'pengguna' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('admin/pengguna')?>"> <i class="menu-icon fa fa-user-circle"></i>Daftar Pengguna</a>
                 </li>
@@ -28,7 +28,7 @@
                     <a href="<?php echo site_url('barang/daftarbarang')?>"> <i class="menu-icon fa fa-tasks"></i>Daftar Barang</a>
                 </li>
               <?php endif; ?>
-
+              <?php if($this->session->userdata('role') <= 2) : ?>
                 <h3 class="menu-title">Manajemen </h3><!-- /.menu-title -->
                 <li class="<?php echo $this->uri->segment(2) == 'menejpinjamruangan' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('pinjam/menejpinjamruangan')?>"> <i class="menu-icon fa fa-file-o"></i>Manajemen Ruangan</a>
@@ -39,6 +39,7 @@
                 <li class="<?php echo $this->uri->segment(2) == 'formpemeliharaan' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('pemeliharaan/formpemeliharaan')?>"> <i class="menu-icon fa fa-camera-retro"></i>Manajemen Peralatan</a>
                 </li>
+              <?php endif; ?>
                 <!-- for user -->
                 <h3 class="menu-title">Form </h3><!-- /.menu-title -->
                 <li class="<?php echo $this->uri->segment(2) == 'calendar' ? 'active' : '' ?>">

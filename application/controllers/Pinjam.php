@@ -35,7 +35,7 @@ class Pinjam extends CI_Controller{
 	}
 
 	function save_bookruangan(){
-		$id_ruangan = $this->input->post('id_ruangan');
+		$id_ruangan = $this->input->post('ruangan');
 		$title = $this->input->post('title');
 		$desc = $this->input->post('desc');
 		$start_date = $this->input->post('start_date');
@@ -47,11 +47,12 @@ class Pinjam extends CI_Controller{
 												'end_date'=>$end_date,
 												'create_by'=>$this->session->userdata('nama'),
 												'modified_by'=>$this->session->userdata('nama'),
-												'id_ruangan'=>$id_ruangan
+												'id_ruangan'=>$id_ruangan,
+												'creator_id'=>$this->session->userdata('id')
 													);
 		if($this->db->insert('calendar',$datapinjam)){
-			echo $this->db->last_query();exit;
-			//redirect(base_url('pinjam/calendar'));
+
+			redirect(base_url('pinjam/calendar'));
 		}else{
 			redirect(base_url('pinjam/formpinjamruangan'));
 		}
@@ -64,12 +65,34 @@ class Pinjam extends CI_Controller{
 
 	function menejpinjamruangan(){
 		$this->load->model('mo_pinjamruangan');
-		$data['daftar_pinjamruangan'] = $this->mo_pinjamruangan->get_daftarpinjamruangan();
+		$where = ' ';
+		if(null !== $this->input->get('r') and $this->input->get('r') != 'ALL') {
+			$where = " and c.id_ruangan = ".$this->input->get('r');
+		}
+		if(null !== $this->input->get('s') and $this->input->get('s') != 'ALL') {
+			$where .= " and c.approval = '".$this->input->get('s')."'";
+		}
+
+		$data['daftar_pinjamruangan'] = $this->mo_pinjamruangan->get_daftarpinjamruangan($where);
+		$data['listruangan'] = $this->db->get('ruangan')->result();
 		$this->load->view('pinjam/vi_menejpinjamruangan',$data);
 	}
 
+	function proses(){
+		$id = $this->input->post('id');
+		$status = $this->input->post('status');
+
+		$sql = "update calendar set approval = '".$status."' where id = '".$id."' ";
+		if($this->db->query($sql)){
+			echo "SUCCESS";
+		}else{
+			echo "FAILED";
+		}
+
+	}
+
 	function calendar($id_ruangan = NULL){
-		
+
 		$data_calendar = $this->pinjamruangan->get_list($id_ruangan);
 
 		$calendar = array();

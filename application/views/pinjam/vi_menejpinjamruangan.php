@@ -43,21 +43,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <strong class="card-title">Daftar Peminjaman Ruangan</strong>
                         </div>
                         <div class="card-header">
-                        <a class="btn btn-primary btn-sm" href="<?php echo site_url('barang/add') ?>" ><i class="fa fa-pencil"></i> Add New</a>
+                          <div class="row form-group">
+                            <div class="col col-md-2"><label for="text-input" class=" form-control-label">Pilih Ruangan</label></div>
+                            <div class="col-12 col-md-3">
+                              <select id="pilihruangan" class="form-control" required>
+                                <option value="ALL">SEMUA</option>
+                                <?php foreach($listruangan as $ruang){ ?>
+                                <option value="<?php echo $ruang->id_ruangan ?>"
+                                        <?php echo $this->input->get('r') == $ruang->id_ruangan ? 'selected' : '' ?>>
+                                        <?php echo $ruang->kode_ruangan ?>
+                                </option>
+                              <?php } ?>
+                              </select>
+                            </div>
+                            <div class="col col-md-2"><label for="text-input" class=" form-control-label">Status</label></div>
+                            <div class="col-md-3">
+                              <select id="status" class="form-control">
+                                <option value="ALL">ALL</option>
+                                <option value="PENDING">PENDING</option>
+                                <option value="APPROVED">APPROVED</option>
+                                <option value="REJECTED">REJECTED</option>
+                              </select>
+                          </div>
+                          <div class="col-md-2">
+                            <a class="btn btn-primary" onclick="window.location.replace('<?php echo base_url('pinjam/menejpinjamruangan/') ?>'+'?r='+$('#pilihruangan').val() +'&'+'s='+$('#status').val())" >GO</a>
+                          </div>
                         </div>
 
                  <div class="card-body">
-                  <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                  <table id="tabelPeminjaman" class="table table-striped table-bordered">
                     <thead>
                         <tr>
 
-                        <th>Kode Ruangan</th>
-                        <th>Nama Ruangan</th>
-                        <th>Fasilitas</th>
-                        <th>Tgl Pinjam</th>
-                        <th>Lama Pinjam (hari)</th>
-                        <th>Peminjam</th>
-                        <th>Tujuan</th>
+                        <th>Judul</th>
+                        <th>Deskripsi</th>
+                        <th>Ruangan</th>
+                        <th>Tgl Mulai</th>
+                        <th>Tgl Berakhir</th>
+                        <th>Dibuat oleh</th>
                         <th>Approval</th>
                         <th>Action</th>
                         </tr>
@@ -68,17 +91,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						?>
 						<tr>
 
-						<td><?php echo $br->kode_barang ?></td>
+						<td><?php echo $br->title ?></td>
+						<td><?php echo $br->description ?></td>
 						<td><?php echo $br->nama_ruangan ?></td>
-						<td> - </td>
-						<td><?php echo $br->tgl_pinjam ?></td>
-						<td><?php echo $br->lama_pinjam ?></td>
-						<td><?php echo $br->nama ?></td>
-            <td><?php echo $br->tujuan ?></td>
-            <td><?php echo $br->approval ?></td>
+						<td><?php echo $br->start_date ?></td>
+						<td><?php echo $br->end_date ?></td>
+						<td><?php echo $br->create_by ?></td>
+            <td class=""><?php echo $br->approval ?></td>
             <td>
-              <a class="btn btn-success btn-sm" href="<?php echo site_url('pinjam/edit/'.$br->id_pinjam_ruangan);?>"class="btn btn-small"><i class="fa fa-edit"></i>Approve</a>
-              <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $br->id_pinjam_ruangan; ?>" onclick="confirm_modal('<?php echo site_url('barang/hapus/'.$br->id_pinjam_ruangan);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Reject</a>
+              <?php if($br->approval == 'PENDING'): ?>
+                <a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#accModal<?php echo $br->id; ?>" onclick="confirm_modal('<?php echo $br->id;?>');" class="btn btn-small"><i class="fa fa-check"></i>Proses</a>
+              <?php endif; ?>
 						</td>
 						</tr>
 
@@ -93,66 +116,65 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 	</div>
-						<div class="modal fade" id="modal_delete_m_n" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="" data-backdrop="static">
+						<div class="modal fade" id="modal_acc" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="" data-backdrop="static">
 							<div class="modal-dialog modal-sm" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="staticModalLabel">Konfirmasi Hapus</h5>
+										<h5 class="modal-title" id="staticModalLabel">Konfirmasi</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
 									<div class="modal-body">
 										<p>
-										Yakin ingin menghapus ini?
+										Setujui permohonan peminjaman ruangan ?
 										</p>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-										<a type="button" class="btn btn-primary" id="delete_link_m_n">Ya, Hapus</a>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <a type="button" class="btn btn-primary"  onclick="proses('APPROVED')" id="btnProsesApproved">Ya, Setujui</a>
+                    <a type="button" class="btn btn-danger" onclick="proses('REJECTED')" id="btnProsesRejected">Tolak</a>
 									</div>
 								</div>
 							</div>
 						</div>
+
+            <?php $this->load->view('foot') ?>
+            <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
+            <!-- script src="< ?php echo base_url('assets/js/main.js');?>"></script -->
+
+
 						<script>
-    	function confirm_modal(delete_url,title)
-    	{
-    		jQuery('#modal_delete_m_n').modal('show', {backdrop: 'static',keyboard :false});
-    		jQuery("#modal_delete_m_n .grt").text(title);
-    		document.getElementById('delete_link_m_n').setAttribute("href" , delete_url );
-    		document.getElementById('delete_link_m_n').focus();
-    	}
+
+
+            function proses(status){
+              var id;
+              if(status == 'APPROVED'){
+                id = $("#btnProsesApproved").attr('idnya');
+              }else{
+                id = $("#btnProsesRejected").attr('idnya');
+              }
+              $.post('<?php echo base_url('pinjam/proses/') ?>',{id : id, status:status})
+                .done(function(data){
+                    if(data == 'SUCCESS'){
+                      window.location.reload();
+                    }
+                })
+
+
+            }
+            	function confirm_modal(id)
+            	{
+            		jQuery('#modal_acc').modal('show', {backdrop: 'static',keyboard :false});
+            		//jQuery("#modal_delete_m_n .grt").text(title);
+            		//document.getElementById('delete_link_m_n').setAttribute("href" , delete_url );
+            		//document.getElementById('delete_link_m_n').focus();
+                $("#btnProsesApproved").attr('idnya',id);
+                $("#btnProsesRejected").attr('idnya',id);
+            	}
     	</script>
 
-    <script src="<?php echo base_url('assets/js/vendor/jquery-2.1.4.min.js');?>"</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/main.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/lib/chart-js/Chart.bundle.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/dashboard.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/widgets.js')?>"></script>
-    <script src="<?php echo base_url('assets/js/lib/vector-map/jquery.vmap.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/lib/vector-map/jquery.vmap.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/lib/vector-map/jquery.vmap.sampledata.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/lib/vector-map/country/jquery.vmap.world.js');?>"></script>
-    <script>
-        ( function ( $ ) {
-            "use strict";
 
-            jQuery( '#vmap' ).vectorMap( {
-                map: 'world_en',
-                backgroundColor: null,
-                color: '#ffffff',
-                hoverOpacity: 0.7,
-                selectedColor: '#1de9b6',
-                enableZoom: true,
-                showTooltip: true,
-                values: sample_data,
-                scaleColors: [ '#1de9b6', '#03a9f5' ],
-                normalizeFunction: 'polynomial'
-            } );
-        } )( jQuery );
-    </script>
 
 </body>
 
