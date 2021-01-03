@@ -40,25 +40,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="container">
 			<div class="card">
                       <div class="card-header">
-                        <strong>Form Pengajuan Pemeliharaan</strong>
+                        <strong>Tambah Jenis Persediaan</strong>
                       </div>
                 <div class="card-body card-block">
 					<div class="bootstrap-iso">
-                        <form action="<?php echo base_url('pemeliharaan/save'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <form action="<?php echo base_url('peralatan/savejenispersediaan'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
 						  <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kode Barang</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="kodebarang" name="kodebarang" placeholder="Kode Barang" class="form-control" required></div>
-
-							<div class="col-12 col-md-9"><input type="hidden" id="idpb" name="idpb" value="" class="form-control" ></div>
-                          </div>
-                          <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Barang</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="namabarang" name="namabarang" placeholder="Nama Barang" class="form-control" required></div>
-                          </div>
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Jenis Persediaan</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="txtjenispersediaan" name="txtjenispersediaan" placeholder="mis: Buku" class="form-control" required></div>
+                </div>
+                <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Satuan</label></div>
+                              <div class="col-12 col-md-9"><input type="text" id="satuan" name="satuan" placeholder="mis: Pak" class="form-control" required></div>
+                  </div>
 
 						              <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Keterangan</label></div>
-                            <div class="col-12 col-md-9"><textarea id="keterangan" name="keterangan" placeholder="Keterangan Pemeliharaan" class="form-control" ></textarea></div>
+                            <div class="col-12 col-md-9"><input type="text" id="keterangan" name="keterangan" placeholder="mis: ukuran buku A5" class="form-control" ></div>
                           </div>
 						  <div class="row form-group">
 						    <div class="col col-md-3"></div>

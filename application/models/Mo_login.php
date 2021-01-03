@@ -14,5 +14,9 @@ class Mo_login extends CI_Model{
 		 $this->db->where($where);
 		 return $this->db->update ('tbl_login',$data);
 	}
-	
+
+	function simpan_pengguna($data){
+		return $this->db->insert('tbl_login',$data);
+	}
+
 }

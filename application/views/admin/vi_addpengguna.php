@@ -44,23 +44,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <form action="<?php echo site_url('admin/penggunasave'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
 
                           <div class="row form-group">
-                                <div class="col col-md-3"><label for="kd" class=" form-control-label">NIP</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="nip" name="nip" placeholder="NIP" class="form-control" required></div>
+                                <div class="col col-md-3"><label for="kd" class=" form-control-label">NIP / username</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="username" name="username" placeholder="NIP" class="form-control" required></div>
                           </div>
 
                           <div class="row form-group">
                                <div class="col col-md-3"><label for="nb" class=" form-control-label">Nama Pegawai</label></div>
-                               <div class="col-12 col-md-9"><input type="text" id="nama_pengguna" name="nama_pengguna" placeholder="Nama Pegawai" class="form-control" required></div>
+                               <div class="col-12 col-md-9"><input type="text" id="nama_lengkap" name="nama_lengkap" placeholder="Nama Lengkap" class="form-control" required></div>
                           </div>
 
                           <div class="row form-group">
-                               <div class="col col-md-3"><label for="merk" class=" form-control-label">Password</label></div>
-                               <div class="col-12 col-md-9"><input type="text" id="password" name="password" placeholder="Password" class="form-control" required></div>
+                               <div class="col col-md-3"><label for="password" class=" form-control-label">Password</label></div>
+                               <div class="col-12 col-md-9"><input type="password" id="password" name="password" placeholder="Password" class="form-control" required></div>
                           </div>
 
                           <div class="row form-group">
                                <div class="col col-md-3"><label for="merk" class=" form-control-label">Ulangi Password</label></div>
-                               <div class="col-12 col-md-9"><input type="text" id="ulangipassword" name="ulangipassword" placeholder="Ulangi Password" class="form-control" required></div>
+                               <div class="col-12 col-md-9"><input type="password" id="ulangipassword" name="ulangipassword" placeholder="Ulangi Password" class="form-control" required></div>
                           </div>
 
                           <div class="row form-group"> <!--dibuat dropdown-->
@@ -68,11 +68,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                <label class="form-control-label" for="kb">Kewenangan</label>
                             </div>
                                <div class="col-12 col-md-9">
-                                    <select id="kb" class="form-control" name="kb">
+                                    <select id="role" class="form-control" name="role">
                                     <option>Pilih</option>
-                                    <option value="SUPERADMIN">Super Admin</option>
-                                    <option value="ADMIN">Admin</option>
-                                    <option value="PENGGUNA">Pengguna</option>
+                                    <option value="1">Super Admin</option>
+                                    <option value="2">Admin</option>
+                                    <option value="3">Pengguna</option>
                                     </select>
                                 </div>
                           </div>

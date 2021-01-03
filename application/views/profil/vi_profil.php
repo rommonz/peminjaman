@@ -65,20 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                <div class="col-12 col-md-9"><input type="password" id="ulangipassword" name="ulangipassword" placeholder="Ulangi Password" class="form-control" required></div>
                           </div>
 
-                          <div class="row form-group"> <!--dibuat dropdown-->
-                            <div class="col col-md-3">
-                               <label class="form-control-label" for="userrole">Kewenangan</label>
-                            </div>
-                               <div class="col-12 col-md-9">
-                                    <select id="kb" class="form-control" name="kb">
-                                    <option>Pilih</option>
-                                    <option value="SUPERADMIN">Super Admin</option>
-                                    <option value="ADMIN">Admin</option>
-                                    <option value="PENGGUNA">Pengguna</option>
-                                    </select>
-                                </div>
-                          </div>
-
+                        
                           <div class="row form-group">
                           </div>
 

@@ -27,7 +27,13 @@ class Admin extends CI_Controller{
 
   function penggunasave(){
     if($this->input->post('save')){
-        $this->mo_barang->simpan();
+				$datainsert = array('username'=>$this->input->post('username'),
+														'password'=>$this->input->post('password'),
+														'nama'=>$this->input->post('nama_lengkap'),
+														'role'=>$this->input->post('role')
+														);
+
+        $this->mo_login->simpan_pengguna($datainsert);
         redirect('admin/pengguna','refresh');
     }else{
       redirect('admin/addpengguna','refresh');

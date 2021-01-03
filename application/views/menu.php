@@ -27,6 +27,12 @@
                 <li class="<?php echo $this->uri->segment(2) == 'daftarbarang' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('barang/daftarbarang')?>"> <i class="menu-icon fa fa-tasks"></i>Daftar Barang</a>
                 </li>
+                <li class="<?php echo $this->uri->segment(2) == 'daftarjenispersediaan' ? 'active' : '' ?>">
+                    <a href="<?php echo site_url('peralatan/daftarjenispersediaan')?>"> <i class="menu-icon fa fa-tasks"></i>Jenis Persediaan</a>
+                </li>
+                <li class="<?php echo $this->uri->segment(2) == 'daftarpersediaan' ? 'active' : '' ?>">
+                    <a href="<?php echo site_url('peralatan/daftarpersediaan')?>"> <i class="menu-icon fa fa-tasks"></i>Daftar Persediaan</a>
+                </li>
               <?php endif; ?>
               <?php if($this->session->userdata('role') <= 2) : ?>
                 <h3 class="menu-title">Manajemen </h3><!-- /.menu-title -->
@@ -45,8 +51,8 @@
                 <li class="<?php echo $this->uri->segment(2) == 'calendar' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('pinjam/calendar')?>"> <i class="menu-icon fa fa-building-o"></i>Kalender Ruangan</a>
                 </li>
-                <li class="<?php echo $this->uri->segment(2) == 'formpemeliharaan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('pemeliharaan/formpemeliharaan')?>"> <i class="menu-icon fa fa-car"></i>Pemeliharaan Asset</a>
+                <li class="<?php echo $this->uri->segment(1) == 'pemeliharaan' ? 'active' : '' ?>">
+                    <a href="<?php echo site_url('pemeliharaan')?>"> <i class="menu-icon fa fa-car"></i>Pemeliharaan Asset</a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'formpengajuanalat' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('peralatan/formpengajuanalat')?>"> <i class="menu-icon fa fa-file-o"></i>Peralatan & Perlengkapan</a>
