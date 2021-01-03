@@ -20,9 +20,12 @@
 			);
 			$cek = $this->Mo_login->cek_login("tbl_login",$where)->num_rows();
 			if($cek > 0){
-
+				$datalogin = $this->Mo_login->cek_login("tbl_login",$where)->row();
 			$data_session = array(
-				'nama' => $username,
+				'id' => $datalogin->id,
+				'username' => $datalogin->username,
+				'nama' => $datalogin->nama,
+				'role' =>$datalogin->role,
 				'status' => "login"
 				);
 

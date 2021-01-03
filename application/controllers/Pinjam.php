@@ -4,10 +4,10 @@ class Pinjam extends CI_Controller{
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model('mo_pinjambarang');
-                if($this->session->userdata('status') != "login"){
+		$this->load->model('mo_pinjamruangan', 'pinjamruangan');
+  	if($this->session->userdata('status') != "login"){
 			redirect(site_url("Login/masuk"));}
-	}
+		}
 
 	function tomaster()
 	{
@@ -34,13 +34,67 @@ class Pinjam extends CI_Controller{
         redirect('crudpinjambarang/kepinjambarang');
 	}
 
+	function save_bookruangan(){
+		$id_ruangan = $this->input->post('id_ruangan');
+		$title = $this->input->post('title');
+		$desc = $this->input->post('desc');
+		$start_date = $this->input->post('start_date');
+		$end_date = $this->input->post('end_date');
+
+		$datapinjam = array('title'=>$title,
+												'description'=>$desc,
+												'start_date'=>$start_date,
+												'end_date'=>$end_date,
+												'create_by'=>$this->session->userdata('nama'),
+												'modified_by'=>$this->session->userdata('nama'),
+												'id_ruangan'=>$id_ruangan
+													);
+		if($this->db->insert('calendar',$datapinjam)){
+			echo $this->db->last_query();exit;
+			//redirect(base_url('pinjam/calendar'));
+		}else{
+			redirect(base_url('pinjam/formpinjamruangan'));
+		}
+	}
+
 	function formpinjamruangan(){
-		$this->load->view('pinjam/vi_pinjambarang');
+		$data['listruangan'] = $this->db->get('ruangan')->result();
+		$this->load->view('pinjam/vi_pinjamruangan',$data);
 	}
 
 	function menejpinjamruangan(){
 		$this->load->model('mo_pinjamruangan');
 		$data['daftar_pinjamruangan'] = $this->mo_pinjamruangan->get_daftarpinjamruangan();
 		$this->load->view('pinjam/vi_menejpinjamruangan',$data);
+	}
+
+	function calendar($id_ruangan = NULL){
+		
+		$data_calendar = $this->pinjamruangan->get_list($id_ruangan);
+
+		$calendar = array();
+		foreach ($data_calendar as $key => $val)
+		{
+			$calendar[] = array(
+				'id' 	=> intval($val->id),
+				'title' =>  "(".$val->kode_ruangan.") ".$val->title,
+				'description' => trim($val->description),
+				'start' => date_format( date_create($val->start_date) ,"Y-m-d H:i:s"),
+				'end' => date_format( date_create($val->end_date) ,"Y-m-d H:i:s"),
+				'allday'=>true,
+				'color' => $val->color
+			);
+		}
+
+		$data = array();
+		$data['get_data']			= json_encode($calendar);
+		$data['listruangan'] = $this->db->get('ruangan')->result();
+		$this->load->view('pinjam/vi_calendar', $data);
+	}
+
+	function detail($id){
+		$data['detail'] = $this->pinjamruangan->get_detail($id);
+		$data['fasilitas']  = $this->pinjamruangan->get_fasilitas($data['detail']->id_ruangan);
+		$this->load->view('pinjam/vi_detailpinjam',$data);
 	}
 }

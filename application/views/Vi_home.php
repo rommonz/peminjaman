@@ -35,8 +35,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 			</div>
         </header>
-		<div class="container text-center">
-
+		<div class="container text-left">
+      <h1><small>Selamat Datang </small><br/><?php echo $this->session->userdata('nama') ?></h1>
 		<!-- a><img src="< ?php echo base_url('assets/images/logo_kominfofix.png');?>" ></a -->
 		</div>
 

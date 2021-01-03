@@ -3,25 +3,10 @@
 class Mo_pinjamruangan extends CI_Model{
 	private $_table = "ruangan";
 	private $view = "view_barang";
-	private $tbl_pinjambarang = "pinje";
-    function save_master()
+
+    function save()
 	{
-		$idpb = $this->input->post('idpb');
-		$nopb = $this->input->post('nopb');
-		$nospt = $this->input->post('nospt');
-		$tanggal = $this->input->post('tanggal');
-		$nama1 = $this->input->post('nama1');
-		$nama2 = $this->input->post('nama2');
-		$tujuan = $this->input->post('tujuan');
-		$data = array(
-            'no_pb' => $nopb,
-			'no_spt' => $nospt,
-            'tanggal' => $tanggal,
-            'nama1' => $nama1,
-            'nama2' => $nama2,
-            'tujuan' => $tujuan
-            );
-        $this->db->insert($this->tbl_pinjambarang,$data);
+		$this->db->insert($this->tbl_pinjambarang,$data);
 		$wi = array('id_pb' => $idpb);
 		$wn = array('no_pb' => $nopb);
 		$data['view_barang'] = $this->db->get_where($this->view, $wi)->result();
@@ -29,6 +14,32 @@ class Mo_pinjamruangan extends CI_Model{
 		$data['tbl_pinjambarang'] = $this->db->get_where($this->tbl_pinjambarang, $wn)->result();
 		$this->load->view('Vi_pinjambarang2', $data);
 	}
+	function get_list($id_ruangan = NULL){
+		//echo "id ruangan ".$id_ruangan; exit;
+		$sql = "select * from calendar c
+						inner join ruangan r on r.id_ruangan = c.id_ruangan
+						where c.approval = 'APPROVED'
+						";
+	if(isset($id_ruangan)){
+		$sql .= " and c.id_ruangan = ".$id_ruangan;
+	}
+
+		return $this->db->query($sql)->result();
+	}
+
+	function get_detail($id){
+		$sql = "select * from calendar c
+						inner join ruangan r on r.id_ruangan = c.id_ruangan
+						where c.id = $id
+						";
+		return $this->db->query($sql)->row();
+	}
+
+	function get_fasilitas($id_ruangan){
+		$sql = "select * from barang where id_ruangan = $id_ruangan ";
+		return $this->db->query($sql)->result();
+	}
+
 	function save_detail()
 	{
 		$idpb = $this->input->post('idpb');

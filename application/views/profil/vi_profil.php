@@ -41,11 +41,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <strong>Edit Profil</strong>
                       </div>
                       <div class="card-body card-block">
-                        <form action="<?php echo site_url('admin/penggunasave'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+                        <form action="<?php echo site_url('profil/updateprofil'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
 
                           <div class="row form-group">
                                 <div class="col col-md-3"><label for="kd" class=" form-control-label">NIP</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="nip" name="nip" placeholder="NIP" class="form-control" required></div>
+                                <div class="col-12 col-md-9"><input type="text" id="nip" name="nip" placeholder="NIP" class="form-control"></div>
+                                <input type="hidden" name="id" value="<?php echo $this->session->userdata('id') ?>" />
                           </div>
 
                           <div class="row form-group">
@@ -55,17 +57,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                           <div class="row form-group">
                                <div class="col col-md-3"><label for="merk" class=" form-control-label">Password</label></div>
-                               <div class="col-12 col-md-9"><input type="text" id="password" name="password" placeholder="Password" class="form-control" required></div>
+                               <div class="col-12 col-md-9"><input type="password" id="password" name="password" placeholder="Password" class="form-control" required></div>
                           </div>
 
                           <div class="row form-group">
                                <div class="col col-md-3"><label for="merk" class=" form-control-label">Ulangi Password</label></div>
-                               <div class="col-12 col-md-9"><input type="text" id="ulangipassword" name="ulangipassword" placeholder="Ulangi Password" class="form-control" required></div>
+                               <div class="col-12 col-md-9"><input type="password" id="ulangipassword" name="ulangipassword" placeholder="Ulangi Password" class="form-control" required></div>
                           </div>
 
                           <div class="row form-group"> <!--dibuat dropdown-->
                             <div class="col col-md-3">
-                               <label class="form-control-label" for="kb">Kewenangan</label>
+                               <label class="form-control-label" for="userrole">Kewenangan</label>
                             </div>
                                <div class="col-12 col-md-9">
                                     <select id="kb" class="form-control" name="kb">

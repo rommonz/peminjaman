@@ -6,30 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <head>
 
-    <script type="text/javascript"></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Peminjaman Barang</title>
-    <meta name="description" content="Peminjaman Barang - Balai Monitoring Spektrum Frekuensi Radio Kelas II Lampung">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="shortcut icon" href="<?php echo base_url('assets/images/logosc.png')?>">
-
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/normalize.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/font-awesome.min.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/themify-icons.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/flag-icon.min.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/cs-skin-elastic.css')?>">
-    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/scss/style.css')?>">
-    <link href="<?php echo base_url('assets/css/lib/vector-map/jqvmap.min.css')?>" rel="stylesheet">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-	<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-datepicker3.css')?>"/>
-
+    <?php $this->load->view('head'); ?>
 </head>
 
 <body>
@@ -54,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
                     <div class="header-left">
-                    <h3>Dashboard</h3>
+                    <h3>Peminjaman</h3>
                     </div>
 				</div>
 			</div>
@@ -63,36 +40,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="container">
 			<div class="card">
                       <div class="card-header">
-                        <strong>Form Peminjaman</strong>
+                        <strong>Form Booking Ruangan <?php //print_r( $this->session->userdata()) ?></strong>
                       </div>
                 <div class="card-body card-block">
 					<div class="bootstrap-iso">
-                        <form action="<?php echo site_url('crudpinjambarang/tomaster'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
-						  <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nomor Peminjaman</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="nopb" name="nopb" placeholder="Nomor Peminjaman Barang" class="form-control" required></div>
-							<div class="col-12 col-md-9"><input type="hidden" id="idpb" name="idpb" value="" class="form-control" ></div>
+                        <form action="<?php echo site_url('pinjam/save_bookruangan'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                          <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Ruangan</label></div>
+                            <div class="col-12 col-md-9">
+                              <select class="form-control" required>
+                                <option></option>
+                                <?php foreach($listruangan as $ruang){ ?>
+                                <option
+                                  <?php echo $this->uri->segment(3) == $ruang->id_ruangan ? 'selected' : '' ?>                                
+                                  value="<?php echo $ruang->id_ruangan ?>"><?php echo $ruang->kode_ruangan ?>
+                                </option>
+                              <?php } ?>
+                              </select>
+                            </div>
                           </div>
                           <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nomor SPT</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="nospt" name="nospt" placeholder="Nomor Surat Perintah Tugas" class="form-control" required></div>
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Judul Kegiatan</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="title" name="title" placeholder="Judul Kegiatan" class="form-control" required></div>
                           </div>
-						  <div class="row form-group">
-                            <div class="col col-md-3"><label for="tanggal" class=" form-control-label">Tanggal</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="tanggal" name="tanggal" placeholder="yyyy-mm-dd" class="tanggal" required></div>
+                          <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Deskripsi</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="desc" name="desc" placeholder="Deskripsi" class="form-control" required></div>
                           </div>
-						  <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama 1</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="nama1" name="nama1" placeholder="Pihak Pertama" class="form-control" required></div>
+						               <div class="row form-group">
+                            <div class="col col-md-3"><label for="tanggal" class=" form-control-label">Mulai</label></div>
+                            <div class="col-12 col-md-9"><input type="datetime-local" id="start_date" name="start_date"  required></div>
                           </div>
-						  <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama 2</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="nama2" name="nama2" placeholder="Pihak Kedua" class="form-control" required></div>
+                          <div class="row form-group">
+                           <div class="col col-md-3"><label for="tanggal" class=" form-control-label">Selesai</label></div>
+                           <div class="col-12 col-md-9"><input type="datetime-local" id="end_date" name="end_date"  required></div>
+                         </div>
+                         <!--div class="row form-group">
+                           <div class="col col-md-4"></div>
+                           <div class="col col-md-8">
+                           <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Fullday
+                            </label>
                           </div>
-						  <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tujuan</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="tujuan" name="tujuan" placeholder="Tujuan Peminjaman" class="form-control" required></div>
-                          </div>
+                        </div -->
+
 						  <div class="row form-group">
 						    <div class="col col-md-3"></div>
 							<div class="col-12 col-md-9">
@@ -141,14 +133,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap.js');?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap-datepicker.js');?>"></script>
-    <script>
-        $(document).ready(function () {
-            $('.tanggal').datepicker({
-                format: "yyyy-mm-dd",
-                autoclose:true
-            });
-        });
-    </script>
 
 
 </body>
