@@ -7,6 +7,29 @@ class Pemeliharaan extends CI_Controller{
     $this->load->model('mo_pemeliharaan', 'pemeliharaan');
   }
 
+  function menejpemeliharaan(){
+    $data['daftar_pemeliharaan'] = $this->pemeliharaan->get_list_all();
+    $data['page_title'] = "Pemeliharaan Asset";
+    $this->load->view('pemeliharaan/vi_menejpemeliharaan',$data);
+  }
+
+  function proses(){
+		$id = $this->input->post('id');
+		$status = $this->input->post('status');
+
+		$sql = "update pemeliharaan set approval = '".$status."' where id_pemeliharaan = '".$id."' ";
+		if($this->db->query($sql)){
+      $this->session->set_flashdata('state','success');
+      $this->session->set_flashdata('msg','Perubahan berhasil disimpan..');
+			echo "SUCCESS";
+		}else{
+      $this->session->set_flashdata('state','danger');
+      $this->session->set_flashdata('msg','Perubahan gagal disimpan..');
+			echo "FAILED";
+		}
+
+	}
+
   function index(){
     $data['daftar_pemeliharaan'] = $this->pemeliharaan->get_list();
     $this->load->view('pemeliharaan/vi_daftarpemeliharaan',$data);

@@ -4,7 +4,7 @@ class Peralatan extends CI_Controller{
 
   function __construct(){
     parent::__construct();
-
+    $this->load->model('Mo_persediaan','persediaan');
   }
 
   function daftarjenispersediaan(){
@@ -28,12 +28,19 @@ class Peralatan extends CI_Controller{
   }
 
   function formpengajuanalat(){
-    $this->load->view('peralatan/vi_formpengajuan');
+    $data['jenis_persediaan'] = $this->db->get('persediaan_jenis')->result();
+    $this->load->view('peralatan/vi_formpengajuan',$data);
   }
 
   function daftarpersediaan(){
-    $data['daftar_persediaan'] = $this->db->get('persediaan')->result();
+    $data['daftar_persediaan'] = $this->persediaan->get_persediaan();
     $this->load->view('peralatan/vi_daftarpersediaan',$data);
+  }
+
+  function lop(){
+    $data['daftar_persediaan'] = $this->persediaan->get_persediaan();
+
+    $this->load->view('peralatan/vi_lop',$data);
   }
 
   function addpersediaan(){
@@ -54,6 +61,12 @@ class Peralatan extends CI_Controller{
     }else{
       redirect('peralatan/addpersediaan');
     }
+  }
+
+  function editpersediaan($id_persediaan){
+    $data['persediaan'] = $this->persediaan->get_persediaan_by_id($id_persediaan);
+    $data['history_transaksi'] = $this->persediaan->get_history_by_id($id_persediaan);
+    $this->load->view('peralatan/vi_editpersediaan');
   }
 
 

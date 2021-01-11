@@ -40,8 +40,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Persediaan Peralatan dan Perlengkapan</strong>
-                            <span><a  class="btn btn-primary" href="<?php echo base_url('peralatan/addpersediaan') ?>"><i class="fa fa-plus"></i> ADD NEW</a></span>
+                            <strong class="card-title">Daftar Permohonan Persediaan</strong>
+                            <span><a  class="btn btn-primary" href="<?php echo base_url('peralatan/formpengajuanalat') ?>"><i class="fa fa-plus"></i> ADD NEW</a></span>
                         </div>
                   <div class="card-body">
                   <table id="tabelPeminjaman" class="table table-striped table-bordered">
@@ -50,11 +50,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <th>No</th>
                           <th>Jenis</th>
                           <th>Nama Persediaan</th>
-                          <th>Jumlah Masuk</th>
-                          <th>Jumlah Keluar</th>
+                          <th>Jumlah</th>
                           <th>Tanggal</th>
                           <th>Keterangan</th>
-                          <th>Action</th>
+                          <th>Status Permohonan</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
@@ -66,13 +66,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <td><?php echo $pr->jenis_persediaan ?></td>
 						<td><?php echo $pr->nama_persediaan ?></td>
             <td><?php echo $pr->jumlah_masuk ?></td>
-						<td><?php echo $pr->jumlah_keluar ?></td>
-            <td><?php echo $pr->tanggal ?></td>
+						<td><?php echo $pr->tanggal ?></td>
             <td><?php echo $pr->keterangan ?></td>
-						<td>
-              <a class="btn btn-warning btn-sm" href="<?php echo site_url('peralatan/editpersediaan/'.$pr->id_persediaan_jenis);?>"class="btn btn-small"><i class="fa fa-edit"></i>Update Stock</a>
-              <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $pr->id_persediaan_jenis; ?>" onclick="confirm_modal('<?php echo site_url('pemeliharaan/hapus/'.$pr->id_persediaan_jenis);?>','hapus');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
-						</td>
+						<td></td>
 						</tr>
 
 						<?php } ?>

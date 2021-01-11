@@ -40,27 +40,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="container">
 			<div class="card">
                       <div class="card-header">
-                        <strong>Form Pengajuan Pemeliharaan</strong>
+                        <strong>Form Pengajuan Persediaan</strong>
                       </div>
                 <div class="card-body card-block">
 					<div class="bootstrap-iso">
-                        <form action="<?php echo site_url('crudpinjambarang/tomaster'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <form action="<?php echo site_url('peralatan/pengajuan'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                      <div class="row form-group">
+                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Jenis Persediaan</label></div>
+                                    <div class="col col-md-9">
+                                    <select id="jenis_persediaan" name="jenis_persediaan" class="form-control">
+                                      <option>PILIH</option>
+                                      <?php foreach($jenis_persediaan as $jp) : ?>
+                                        <option value="<?php echo $jp->id_persediaan_jenis ?>"><?php echo $jp->jenis_persediaan ?></option>
+                                      <?php endforeach; ?>
+                                    </select>
+                                  </div>
+                        </div>
+
 						  <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kode Barang</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="nopb" name="nopb" placeholder="Nomor Peminjaman Barang" class="form-control" required></div>
-							<div class="col-12 col-md-9"><input type="hidden" id="idpb" name="idpb" value="" class="form-control" ></div>
-                          </div>
-                          <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Barang</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="nospt" name="nospt" placeholder="Nomor Surat Perintah Tugas" class="form-control" required></div>
-                          </div>
-						  <div class="row form-group">
-                            <div class="col col-md-3"><label for="tanggal" class=" form-control-label">Tanggal</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="tanggal" name="tanggal" placeholder="yyyy-mm-dd" class="tanggal" required></div>
+                            <div class="col col-md-3"><label for="tanggal" class=" form-control-label">Jumlah</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="jumlah" name="jumlah" placeholder="jumlah yang diajukan" class="form-control" required></div>
                           </div>
 						  <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Keterangan</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="nama1" name="nama1" placeholder="Keterangan Ppmeliharaan" class="form-control" required></div>
+                            <div class="col-12 col-md-9"><input type="text" id="nama1" name="nama1" placeholder="Keterangan" class="form-control" ></div>
                           </div>
 						  <div class="row form-group">
 						    <div class="col col-md-3"></div>

@@ -17,22 +17,25 @@
                     <a href="<?php echo site_url('admin/index')?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard</a>
                 </li>
                 <?php if($this->session->userdata('role') <= 2) : ?>
-                <h3 class="menu-title">Master </h3><!-- /.menu-title -->
-                <li class="<?php echo $this->uri->segment(2) == 'pengguna' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('admin/pengguna')?>"> <i class="menu-icon fa fa-user-circle"></i>Daftar Pengguna</a>
+
+                <li class="menu-item-has-children dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-keyboard-o"></i>Master</a>
+                  <ul class="sub-menu children dropdown-menu">
+                    <li class="<?php echo $this->uri->segment(2) == 'pengguna' ? 'active' : '' ?>">
+                        <a href="<?php echo site_url('admin/pengguna')?>"> <i class="fa fa-users"></i>Daftar Pengguna</a>
+                    </li>
+                    <li class="<?php echo $this->uri->segment(2) == 'daftarruangan' ? 'active' : '' ?>">
+                        <a href="<?php echo site_url('ruangan/daftarruangan')?>"> <i class="fa fa-map-marker"></i>Daftar Ruangan</a>
+                    </li>
+                    <li class="<?php echo $this->uri->segment(2) == 'daftarbarang' ? 'active' : '' ?>">
+                        <a href="<?php echo site_url('barang/daftarbarang')?>"> <i class="fa fa-laptop"></i>Daftar Barang</a>
+                    </li>
+                    <li class="<?php echo $this->uri->segment(2) == 'daftarjenispersediaan' ? 'active' : '' ?>">
+                        <a href="<?php echo site_url('peralatan/daftarjenispersediaan')?>"> <i class="fa fa-tags"></i>Jenis Persediaan</a>
+                    </li>
+                  </ul>
                 </li>
-                <li class="<?php echo $this->uri->segment(2) == 'daftarruangan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('ruangan/daftarruangan')?>"> <i class="menu-icon fa fa-building"></i>Daftar Ruangan</a>
-                </li>
-                <li class="<?php echo $this->uri->segment(2) == 'daftarbarang' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('barang/daftarbarang')?>"> <i class="menu-icon fa fa-tasks"></i>Daftar Barang</a>
-                </li>
-                <li class="<?php echo $this->uri->segment(2) == 'daftarjenispersediaan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('peralatan/daftarjenispersediaan')?>"> <i class="menu-icon fa fa-tasks"></i>Jenis Persediaan</a>
-                </li>
-                <li class="<?php echo $this->uri->segment(2) == 'daftarpersediaan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('peralatan/daftarpersediaan')?>"> <i class="menu-icon fa fa-tasks"></i>Daftar Persediaan</a>
-                </li>
+              <!-- end master menu -->
               <?php endif; ?>
               <?php if($this->session->userdata('role') <= 2) : ?>
                 <h3 class="menu-title">Manajemen </h3><!-- /.menu-title -->
@@ -42,8 +45,8 @@
                 <li class="<?php echo $this->uri->segment(2) == 'menejpemeliharaan' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('pemeliharaan/menejpemeliharaan')?>"> <i class="menu-icon fa fa-file-o"></i>Manajemen Asset</a>
                 </li>
-                <li class="<?php echo $this->uri->segment(2) == 'formpemeliharaan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('pemeliharaan/formpemeliharaan')?>"> <i class="menu-icon fa fa-camera-retro"></i>Manajemen Peralatan</a>
+                <li class="<?php echo $this->uri->segment(2) == 'daftarpersediaan' ? 'active' : '' ?>">
+                    <a href="<?php echo site_url('peralatan/daftarpersediaan')?>"> <i class="menu-icon fa fa-camera-retro"></i>Manajemen Peralatan</a>
                 </li>
               <?php endif; ?>
                 <!-- for user -->
@@ -54,8 +57,8 @@
                 <li class="<?php echo $this->uri->segment(1) == 'pemeliharaan' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('pemeliharaan')?>"> <i class="menu-icon fa fa-car"></i>Pemeliharaan Asset</a>
                 </li>
-                <li class="<?php echo $this->uri->segment(2) == 'formpengajuanalat' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('peralatan/formpengajuanalat')?>"> <i class="menu-icon fa fa-file-o"></i>Peralatan & Perlengkapan</a>
+                <li class="<?php echo $this->uri->segment(2) == 'lop' ? 'active' : '' ?>">
+                    <a href="<?php echo site_url('peralatan/lop')?>"> <i class="menu-icon fa fa-file-o"></i>Peralatan & Perlengkapan</a>
                 </li>
                 <!-- li class="<?php echo $this->uri->segment(2) == 'kelaporan' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('Laporanbarang/kelaporan')?>"> <i class="menu-icon fa fa-print"></i>Laporan Peminjaman</a>

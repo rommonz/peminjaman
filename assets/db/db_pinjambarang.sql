@@ -45,9 +45,9 @@ INSERT INTO `barang` (`id_barang`, `kode_barang`, `nama_barang`, `merk`, `no_ser
 (1, '3060324005-', 'spektrum analyzer', 'anritsu ms 2720t', '1536028', 'Baik', 1, NULL),
 (2, '3060324005', 'antena dipole', 'anritsu mp534b', '', 'baik', 1, NULL),
 (3, 'gps123', 'gps garmin', 'montana 680', '30303010726', 'Baik', 2, NULL),
-(6, 'coba update', 'coba update', 'merk coba update', 'seri coba update', 'Baik', 5, 'adasd.jpg'),
-(7, 'baranga', 'KURSI', 'merks', '12345', 'Baik', 1, 'baranga.png'),
-(8, 'barangnya22', 'Meja', 'merk', '1234', 'Baik', 1, 'barangnya22.jpg');
+(6, 'coba update', 'coba update', 'merk coba update', 'seri coba update', 'Baik', 5, NULL),
+(7, 'baranga', 'KURSI', 'merks', '12345', 'Baik', 1, NULL),
+(8, 'barangnya22', 'Meja', 'merk', '1234', 'Baik', 1, NULL);
 
 -- --------------------------------------------------------
 

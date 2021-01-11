@@ -11,6 +11,14 @@ class Mo_pemeliharaan extends CI_Model{
     return $this->db->get('pemeliharaan')->result();
   }
 
+  function get_list_all($where = NULL){
+    $sql = "select * from pemeliharaan p ";
+    if(isset($where)){
+      $sql .= $where;
+    }
+    return $this->db->query($sql)->result();
+  }
+
   function hapus_pengajuan($id_pemeliharaan){
     return $this->db->delete('pemeliharaan',array('id_pemeliharaan'=>$id_pemeliharaan));
   }
