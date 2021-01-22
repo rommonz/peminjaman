@@ -22,11 +22,17 @@ class Mo_persediaan extends CI_Model{
 
   function update_persediaan($id_persediaan, $data){
 
-    
+
   }
 
   function get_history_by_id($id_persediaan){
     $sql = "select * from persediaan_transaksi pt where pt.id_persediaan = ".$id_persediaan;
+    return $this->db->query($sql)->result();
+  }
+
+  function get_transaksi(){
+
+    $sql = "select * from persediaan_transaksi pt";
     return $this->db->query($sql)->result();
   }
 

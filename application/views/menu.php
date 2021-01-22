@@ -46,7 +46,7 @@
                     <a href="<?php echo site_url('pemeliharaan/menejpemeliharaan')?>"> <i class="menu-icon fa fa-file-o"></i>Manajemen Asset</a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'daftarpersediaan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('peralatan/daftarpersediaan')?>"> <i class="menu-icon fa fa-camera-retro"></i>Manajemen Peralatan</a>
+                    <a href="<?php echo site_url('peralatanadmin/daftarpersediaan')?>"> <i class="menu-icon fa fa-camera-retro"></i>Manajemen Peralatan</a>
                 </li>
               <?php endif; ?>
                 <!-- for user -->
@@ -58,10 +58,10 @@
                     <a href="<?php echo site_url('pemeliharaan')?>"> <i class="menu-icon fa fa-car"></i>Pemeliharaan Asset</a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'lop' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('peralatan/lop')?>"> <i class="menu-icon fa fa-file-o"></i>Peralatan & Perlengkapan</a>
+                    <a href="<?php echo site_url('peralatan/transaksi')?>"> <i class="menu-icon fa fa-file-o"></i>Peralatan & Perlengkapan</a>
                 </li>
                 <!-- li class="<?php echo $this->uri->segment(2) == 'kelaporan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('Laporanbarang/kelaporan')?>"> <i class="menu-icon fa fa-print"></i>Laporan Peminjaman</a>
+                    <a href="< ?php echo site_url('Laporanbarang/kelaporan')?>"> <i class="menu-icon fa fa-print"></i>Laporan Peminjaman</a>
                 </li -->
                 <h3 class="menu-title"></h3>
                 <li class="<?php echo $this->uri->segment(2) == 'editprofil' ? 'active' : '' ?>">
