@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <td><?php echo $pr->jumlah_persediaan ?></td>
 						<td><?php echo $pr->keterangan ?></td>
 						<td>
-              <a class="btn btn-warning btn-sm" href="<?php echo site_url('peralatanadmin/update_persediaan/'.$pr->id_persediaan_jenis);?>"class="btn btn-small"><i class="fa fa-edit"></i>Update Stock</a>
+              <a class="btn btn-warning btn-sm" href="<?php echo site_url('peralatanadmin/update_persediaan/'.$pr->id_persediaan);?>"class="btn btn-small"><i class="fa fa-edit"></i>Update Stock</a>
               <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $pr->id_persediaan_jenis; ?>" onclick="confirm_modal('<?php echo site_url('pemeliharaan/hapus/'.$pr->id_persediaan_jenis);?>','hapus');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
 						</td>
 						</tr>

@@ -22,10 +22,11 @@ class Peralatanadmin extends CI_Controller{
 
     //$data['persediaan'] = $this->persediaan->get_persediaan_by_id($id_persediaan);
     $sqlpersediaan = "select * from persediaan p inner join persediaan_jenis pj on pj.id_persediaan_jenis = p.id_persediaan_jenis where p.id_persediaan = ".$id_persediaan;
+    //echo($sqlpersediaan);exit;
     $data['persediaan'] = $this->db->query($sqlpersediaan)->row();
-
-    $sqlhistory = "select * from persediaan_history ph inner join persediaan p on p.id_persediaan = ph.id_persediaan where p.id_persediaan = ".$id_persediaan;
     
+    $sqlhistory = "select * from persediaan_history ph inner join persediaan p on p.id_persediaan = ph.id_persediaan where p.id_persediaan = ".$id_persediaan;
+
     $data['transaksi_history'] = $this->db->query($sqlhistory)->result();
 
     $sqltransaksi = "select * from persediaan_transaksi_detail ptd
