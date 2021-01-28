@@ -42,12 +42,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                <div class="col-12 col-md-9"><input type="text" id="username" name="username" value="<?php echo $pengguna->username ?>" placeholder="Nama" class="form-control" required></div>
                           </div>
                           <div class="row form-group">
-                                <div class="col col-md-3"><label for="kd" class=" form-control-label">NIP</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="nip" name="nip" placeholder="NIP" class="form-control" value="<?php echo $pengguna->nip ? $pengguna->nip : "" ?>" /></div>
-                                <input type="hidden" value="<?php echo $pengguna->id ?>" name="id" id="id" />
-                          </div>
-
-                          <div class="row form-group">
                                <div class="col col-md-3"><label for="nb" class=" form-control-label">Nama</label></div>
                                <div class="col-12 col-md-9"><input type="text" id="nama" name="nama" value="<?php echo $pengguna->nama ?>" placeholder="Nama" class="form-control" required></div>
                           </div>
@@ -70,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <select id="role" class="form-control" name="role">
                                     <option>Pilih</option>
                                     <?php foreach($roles as $role): ?>
-                                    <option <?php echo $role->id_role == $pengguna->role ? 'selected' : '' ?> value="<?php echo $role->id_role ?>"><?php echo $role->role_name ?></option>
+                                    <option <?php echo $role->role_name == $pengguna->role ? 'selected' : '' ?> value="<?php echo $role->id_role ?>"><?php echo $role->role_name ?></option>
                                   <?php endforeach; ?>
                                     </select>
                                 </div>

@@ -15,6 +15,18 @@ class Mo_login extends CI_Model{
 		 return $this->db->update ('tbl_login',$data);
 	}
 
+	function check_duplicate_username($username){
+
+		$this->db->where('username',$username);
+		$query = $this->db->get('tbl_login');
+
+		if($query->num_rows() > 0){
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	}
+
 	function simpan_pengguna($data){
 		return $this->db->insert('tbl_login',$data);
 	}

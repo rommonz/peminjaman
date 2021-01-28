@@ -87,9 +87,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    <button type="submit" class="btn btn-primary btn-sm" onclick="window.history.back()">
                    <i class="fa fa-reply"></i> Kembali
                    </button>
-                  <?php if($this->session->userdata('role') <= 2 && $detail->approval == 'PENDING') : ?>
-                    <a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#accModal<?php echo $detail->id; ?>" onclick="confirm_modal('<?php echo $this->uri->segment(3) ?>');" class="btn btn-small"><i class="fa fa-check"></i>Proses</a>
-                  <?php endif; ?>
+                  <?php if($this->session->userdata('role') <= 2 && $detail->approval == 'PENDING') { ?>
+                    <a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#accModal<?php echo $detail->id; ?>" onclick="confirm_modal('<?php echo $this->uri->segment(3) ?>');" class="btn btn-small"><i class="fa fa-check"></i> Proses</a>
+                  <?php }else{ ?>
+                    <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#accModal<?php echo $detail->id; ?>" onclick="cancel_modal('<?php echo $this->uri->segment(3) ?>');" class="btn btn-small"><i class="fa fa-trash"></i> Batal</a>
+                  <?php } ?>
                    </div>
                  </div>
 
@@ -119,11 +121,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
           <a type="button" class="btn btn-primary"  onclick="proses('APPROVED')" id="btnProsesApproved">Ya, Setujui</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="cancel_modal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="" data-backdrop="static">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticModalLabel">Konfirmasi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+          Batalkan peminjaman ruangan ?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+          <a type="button" class="btn btn-primary"  onclick="canceling('APPROVED')" id="btnProsesApproved">Ya, Batalkan</a>
           <a type="button" class="btn btn-danger" onclick="proses('REJECTED')" id="btnProsesRejected">Tolak</a>
         </div>
       </div>
     </div>
   </div>
+
+
   <?php $this->load->view('foot') ?>
   <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
 	<script>
@@ -132,6 +158,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     jQuery('#modal_acc').modal('show', {backdrop: 'static',keyboard :false});
     $("#btnProsesApproved").attr('idnya',id);
     $("#btnProsesRejected").attr('idnya',id);
+  }
+
+  function cancel_modal(id)
+  {
+    jQuery('#cancel_modal').modal('show', {backdrop: 'static',keyboard :false});
+    //$("#btnProsesApproved").attr('idnya',id);
+    //$("#btnProsesRejected").attr('idnya',id);
   }
 
   function proses(status){

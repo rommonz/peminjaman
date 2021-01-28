@@ -27,14 +27,28 @@ class Admin extends CI_Controller{
 
   function penggunasave(){
     if($this->input->post('save')){
+
 				$datainsert = array('username'=>$this->input->post('username'),
 														'password'=>$this->input->post('password'),
 														'nama'=>$this->input->post('nama_lengkap'),
 														'role'=>$this->input->post('role')
 														);
+			if($this->mo_login->check_duplicate_username($this->input->post('username'))){
+					if($this->mo_login->simpan_pengguna($datainsert)){
+						//set flash message
+						$this->session->set_flashdata('state','success');
+			      $this->session->set_flashdata('msg','Pengguna baru tersimpan');
 
-        $this->mo_login->simpan_pengguna($datainsert);
-        redirect('admin/pengguna','refresh');
+						redirect('admin/pengguna');
+					}
+			}else{
+				//set flash gagal
+				$this->session->set_flashdata('state','danger');
+	      $this->session->set_flashdata('msg','username sudah digunakan, silahkan gunakan username lain');
+
+				redirect('admin/addpengguna','refresh');
+			}
+
     }else{
       redirect('admin/addpengguna','refresh');
     }

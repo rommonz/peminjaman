@@ -36,6 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </header><!-- /header -->
         <!-- Header-->
 		<div class="container">
+      <?php $this->load->view('flashdata') ?>
                     <div class="card">
                       <div class="card-header">
                         <strong>Tambah Pengguna</strong>
@@ -70,9 +71,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                <div class="col-12 col-md-9">
                                     <select id="role" class="form-control" name="role">
                                     <option>Pilih</option>
-                                    <option value="1">Super Admin</option>
-                                    <option value="2">Admin</option>
-                                    <option value="3">Pengguna</option>
+                                    <option value="SUPERADMIN">Super Admin</option>
+                                    <option value="ADMINRUANG">Admin Ruangan</option>
+                                    <option value="ADMINASET">Admin Aset</option>
+                                    <option value="ADMINSUPPLY">Admin Barang Persediaan</option>
+                                    <option value="USER">Pengguna</option>
                                     </select>
                                 </div>
                           </div>

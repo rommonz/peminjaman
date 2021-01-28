@@ -34,6 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- Header-->
         <!-- TABEL-->
                 <div class="content mt-3">
+                    <?php $this->load->view('flashdata') ?>
                     <div class="animated fadeIn">
                         <div class="row">
 
@@ -44,42 +45,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
                                 <div class="card-header">
                                 <a class="btn btn-primary btn-sm" href="<?php echo site_url('admin/addpengguna') ?>" ><i class="fa fa-pencil"></i> Add New</a>
-                                </div>
+                              </div>
 
                          <div class="card-body">
-                          <table id="bootstrap-data-table" class="table table-striped stable-bordered">
+                          <table id="table-pengguna" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-
-                                <th>NIP</th>
                                 <th>Nama</th>
                                 <th>Username</th>
+                                <th>Role</th>
                                 <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-        						<?php
-        						foreach($daftar_pengguna as $peg){
-        						?>
-        						<tr>
+                    						<?php
+                    						foreach($daftar_pengguna as $peg){
+                    						?>
+                    						<tr>
+                                <td><?php echo $peg->nama ?></td>
+                    						<td><?php echo $peg->username ?></td>
+                                <td><?php echo $peg->role ?></td>
+                    						<td>
+                                  <a class="btn btn-warning btn-sm" href="<?php echo site_url('admin/editpengguna/'.$peg->id);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
+                                  <?php if($peg->role != 'SUPERADMIN') { ?>
+                                  <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $peg->id; ?>" onclick="confirm_modal('<?php echo site_url('admin/hapususer/'.$peg->id);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
+                                <?php } ?>
+                                </td>
+                    						</tr>
 
-        						<td><?php echo $peg->nip ?></td>
-        						<td><?php echo $peg->nama ?></td>
-        						<td><?php echo $peg->username ?></td>
-        						<td>
-                      <a class="btn btn-warning btn-sm" href="<?php echo site_url('admin/editpengguna/'.$peg->id);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
-                      <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $peg->id; ?>" onclick="confirm_modal('<?php echo site_url('admin/hapususer/'.$peg->id);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
-        						</td>
-        						</tr>
-
-        						<?php } ?>
+                    						<?php } ?>
                             </tbody>
                         </table>
         				</div>
         				</div>
         			</div>
         		</div>
-
         		</div>
         	</div>
         	</div>
@@ -113,35 +113,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             		document.getElementById('delete_link_m_n').focus();
             	}
             	</script>
+              <?php $this->load->view('foot') ?>
 
-            <script src="<?php echo base_url('assets/js/vendor/jquery-2.1.4.min.js');?>"</script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-            <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
-            <script src="<?php echo base_url('assets/js/main.js');?>"></script>
-            <script src="<?php echo base_url('assets/js/lib/chart-js/Chart.bundle.js');?>"></script>
-            <script src="<?php echo base_url('assets/js/dashboard.js');?>"></script>
-            <script src="<?php echo base_url('assets/js/widgets.js')?>"></script>
-            <script src="<?php echo base_url('assets/js/lib/vector-map/jquery.vmap.js');?>"></script>
-            <script src="<?php echo base_url('assets/js/lib/vector-map/jquery.vmap.min.js');?>"></script>
-            <script src="<?php echo base_url('assets/js/lib/vector-map/jquery.vmap.sampledata.js');?>"></script>
-            <script src="<?php echo base_url('assets/js/lib/vector-map/country/jquery.vmap.world.js');?>"></script>
+            <!-- script src="<?php // echo base_url('assets/js/vendor/jquery-2.1.4.min.js');?>"</script -->
+            <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script -->
+            <!-- script src="<?php // echo base_url('assets/js/plugins.js');?>"></script -->
+            <!-- script src="<?php // echo base_url('assets/js/main.js');?>"></script -->
+            <!-- script src="< ?php echo base_url('assets/js/lib/chart-js/Chart.bundle.js');?>"></script -->
+            <!-- script src="<?php // echo base_url().'assets/js/lib/datatable/jquery.dataTables.min.js'; ?>"></script -->
+            <!-- script src="<?php // echo base_url().'assets/js/lib/datatable/dataTables.botstrap.min.js'; ?>"></script -->
+            <!-- script src="<?php // echo base_url().'assets/js/lib/datatable/dataTables.min.js'; ?>"></script -->
+            <!-- script src="<?php // echo base_url('assets/js/dashboard.js');?>"></script -->
+            <!-- script src="<?php // echo base_url('assets/js/widgets.js')?>"></script -->
+            <!-- script src="<?php //echo base_url('assets/js/lib/vector-map/jquery.vmap.js');?>"></script -->
+            <!-- script src="<?php// echo base_url('assets/js/lib/vector-map/jquery.vmap.min.js');?>"></script -->
+            <!-- script src="<?php // echo base_url('assets/js/lib/vector-map/jquery.vmap.sampledata.js');?>"></script -->
+            <!-- script src="<?php //echo base_url('assets/js/lib/vector-map/country/jquery.vmap.world.js');?>"></script -->
             <script>
-                ( function ( $ ) {
-                    "use strict";
-
-                    jQuery( '#vmap' ).vectorMap( {
-                        map: 'world_en',
-                        backgroundColor: null,
-                        color: '#ffffff',
-                        hoverOpacity: 0.7,
-                        selectedColor: '#1de9b6',
-                        enableZoom: true,
-                        showTooltip: true,
-                        values: sample_data,
-                        scaleColors: [ '#1de9b6', '#03a9f5' ],
-                        normalizeFunction: 'polynomial'
-                    } );
-                } )( jQuery );
+            $(document).ready(function() {
+                jQuery('#table-pengguna').DataTable();
+              } );
             </script>
 
         </body>
