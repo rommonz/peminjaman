@@ -74,6 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <?php if($transaksi->status_transaksi == 'DRAFT'){ ?>
           <btn class="btn btn-primary btn-sm" onclick="(ajukan(<?php echo $transaksi->id_persediaan_transaksi ?>))" ><i class="fa fa-arrow-circle-right"></i> Ajukan</btn>
         <?php } ?>
+          <btn class="btn btn-primary btn-sm" onclick="(cetak(<?php echo $transaksi->id_persediaan_transaksi ?>))" ><i class="fa fa-arrow-circle-right"></i> Cetak Form Permintaan</btn>
         </div>
 				</div>
 			</div>
@@ -221,6 +222,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           window.location.reload();
         })
     }
+  }
+
+  function cetak(id_transaksi){
+    alert(id_transaksi);
   }
 </script>
 

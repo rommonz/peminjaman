@@ -65,7 +65,7 @@
                 </li -->
                 <h3 class="menu-title"></h3>
                 <li class="<?php echo $this->uri->segment(2) == 'editprofil' ? 'active' : '' ?>">
-                  <a href="<?php echo site_url('profil/editprofil')?>"> <i class="menu-icon fa fa fa-cog"></i>	<?php echo 'Profil '.$this->session->userdata('username') ?></a>
+                  <a href="<?php echo site_url('profil/editprofil/') ?>"> <i class="menu-icon fa fa fa-cog"></i>	<?php echo 'Profil '.$this->session->userdata('username') ?></a>
                 </li>
                 <li>
                   <a href="<?php echo site_url('Login/keluar')?>"> <i class="menu-icon fa fa fa-sign-out"></i>	Logout</a>

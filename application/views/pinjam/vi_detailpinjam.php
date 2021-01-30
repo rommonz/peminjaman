@@ -90,7 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <?php if($this->session->userdata('role') <= 2 && $detail->approval == 'PENDING') { ?>
                     <a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#accModal<?php echo $detail->id; ?>" onclick="confirm_modal('<?php echo $this->uri->segment(3) ?>');" class="btn btn-small"><i class="fa fa-check"></i> Proses</a>
                   <?php }else{ ?>
-                    <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#accModal<?php echo $detail->id; ?>" onclick="cancel_modal('<?php echo $this->uri->segment(3) ?>');" class="btn btn-small"><i class="fa fa-trash"></i> Batal</a>
+                    <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#accModal<?php echo $detail->id; ?>" onclick="cancel('<?php echo $this->uri->segment(3) ?>');" class="btn btn-small"><i class="fa fa-trash"></i> Batal</a>
                   <?php } ?>
                    </div>
                  </div>
@@ -121,6 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
           <a type="button" class="btn btn-primary"  onclick="proses('APPROVED')" id="btnProsesApproved">Ya, Setujui</a>
+          <a type="button" class="btn btn-danger" onclick="proses('REJECTED')" id="btnProsesRejected">Tolak</a>
         </div>
       </div>
     </div>
@@ -137,13 +138,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div class="modal-body">
           <p>
-          Batalkan peminjaman ruangan ?
+          Batalkan status ?
           </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-          <a type="button" class="btn btn-primary"  onclick="canceling('APPROVED')" id="btnProsesApproved">Ya, Batalkan</a>
-          <a type="button" class="btn btn-danger" onclick="proses('REJECTED')" id="btnProsesRejected">Tolak</a>
+          <a type="button" class="btn btn-primary"  onclick="proses('PENDING')" id="btnProsesCancel">Ya, Batalkan</a>
+          <!-- a type="button" class="btn btn-danger" onclick="proses('REJECTED')" id="btnProsesRejected">Tolak</a -->
         </div>
       </div>
     </div>
@@ -160,13 +161,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     $("#btnProsesRejected").attr('idnya',id);
   }
 
-  function cancel_modal(id)
-  {
-    jQuery('#cancel_modal').modal('show', {backdrop: 'static',keyboard :false});
-    //$("#btnProsesApproved").attr('idnya',id);
-    //$("#btnProsesRejected").attr('idnya',id);
+  function cancel(id){
+    var r = confirm("Anda akan membatalkan peminjaman ruangan ?!");
+    if (r == true) {
+      $.post('<?php echo base_url('pinjam/proses/') ?>',{id : id, status:'CANCELED'})
+        .done(function(data){
+            if(data == 'SUCCESS'){
+              window.location.reload();
+            }
+        })
+    } else {
+      txt = "You pressed Cancel!";
+    }
   }
-
   function proses(status){
     var id;
     if(status == 'APPROVED'){

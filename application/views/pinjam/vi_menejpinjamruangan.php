@@ -100,7 +100,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <td class=""><?php echo $br->approval ?></td>
             <td>
               <?php if($br->approval == 'PENDING'): ?>
-                <a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#accModal<?php echo $br->id; ?>" onclick="confirm_modal('<?php echo $br->id;?>');" class="btn btn-small"><i class="fa fa-check"></i>Proses</a>
+                <a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#accModal<?php echo $br->id; ?>" onclick="confirm_modal('<?php echo $br->id;?>');" class="btn btn-small"><i class="fa fa-check"></i >Proses</a>
+              <?php elseif ($br->approval == 'APPROVED') : ?>
+                <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#accModal<?php echo $br->id; ?>" onclick="cancel('<?php echo $br->id;?>');" class="btn btn-small"><i class="fa fa-trash"></i> Cancel</a>
               <?php endif; ?>
 						</td>
 						</tr>
@@ -146,11 +148,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						<script>
 
-
             function proses(status){
               var id;
               if(status == 'APPROVED'){
                 id = $("#btnProsesApproved").attr('idnya');
+
               }else{
                 id = $("#btnProsesRejected").attr('idnya');
               }
@@ -162,6 +164,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 })
 
 
+            }
+
+            function cancel(id){
+              var r = confirm("Anda akan membatalkan peminjaman ruangan ?!");
+              if (r == true) {
+                $.post('<?php echo base_url('pinjam/proses/') ?>',{id : id, status:'CANCELED'})
+                  .done(function(data){
+                      if(data == 'SUCCESS'){
+                        window.location.reload();
+                      }
+                  })
+              } else {
+                txt = "You pressed Cancel!";
+              }
             }
             	function confirm_modal(id)
             	{

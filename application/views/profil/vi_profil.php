@@ -45,8 +45,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <form action="<?php echo site_url('profil/updateprofil'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
 
                           <div class="row form-group">
-                                <div class="col col-md-3"><label for="kd" class=" form-control-label">NIP</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="nip" name="nip" placeholder="NIP" class="form-control"></div>
+                                <div class="col col-md-3"><label for="kd" class=" form-control-label">NIP/Username</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="nip" name="username" value="<?php echo $profil->username ?>" placeholder="Username" class="form-control"></div>
                                 <input type="hidden" name="id" value="<?php echo $this->session->userdata('id') ?>" />
                           </div>
 
@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                <div class="col-12 col-md-9"><input type="password" id="ulangipassword" name="ulangipassword" placeholder="Ulangi Password" class="form-control" required></div>
                           </div>
 
-                        
+
                           <div class="row form-group">
                           </div>
 

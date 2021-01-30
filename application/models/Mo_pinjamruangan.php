@@ -17,7 +17,8 @@ class Mo_pinjamruangan extends CI_Model{
 	function get_list($id_ruangan = NULL){
 		//echo "id ruangan ".$id_ruangan; exit;
 		$sql = "select c.*, r.kode_ruangan, r.nama_ruangan,
-						IF(c.approval = 'APPROVED', 'GREEN',IF(c.approval = 'PENDING','YELLOW','RED')) as color
+
+						IF(c.approval = 'APPROVED', 'GREEN',IF(c.approval = 'PENDING','YELLOW',(IF(c.approval = 'REjECTED','RED','GREY')))) as color
 						from calendar c
 						inner join ruangan r on r.id_ruangan = c.id_ruangan
 
