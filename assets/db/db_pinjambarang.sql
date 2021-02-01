@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2021 at 05:42 PM
+-- Generation Time: Feb 01, 2021 at 02:22 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -42,12 +42,12 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `kode_barang`, `nama_barang`, `merk`, `no_seri`, `kondisi_barang`, `id_ruangan`, `foto`) VALUES
-(1, '3060324005-', 'spektrum analyzer', 'anritsu ms 2720t', '1536028', 'Baik', 1, NULL),
+(1, '3060324005-', 'spektrum analyzer', 'anritsu ms 2720t', '1536028', 'Baik', 1, '3060324005-.jpg'),
 (2, '3060324005', 'antena dipole', 'anritsu mp534b', '', 'baik', 1, NULL),
 (3, 'gps123', 'gps garmin', 'montana 680', '30303010726', 'Baik', 2, NULL),
-(6, 'coba update', 'coba update', 'merk coba update', 'seri coba update', 'Baik', 5, NULL),
-(7, 'baranga', 'KURSI', 'merks', '12345', 'Baik', 1, NULL),
-(8, 'barangnya22', 'Meja', 'merk', '1234', 'Baik', 1, NULL);
+(6, 'coba update', 'coba update', 'merk coba update', 'seri coba update', 'Baik', 5, 'adasd.jpg'),
+(7, 'baranga', 'KURSI', 'merks', '12345', 'Baik', 1, 'baranga.png'),
+(8, 'barangnya22', 'Meja', 'merk', '1234', 'Baik', 1, 'barangnya22.jpg');
 
 -- --------------------------------------------------------
 
@@ -77,12 +77,13 @@ CREATE TABLE `calendar` (
 --
 
 INSERT INTO `calendar` (`id`, `title`, `description`, `start_date`, `end_date`, `create_at`, `create_by`, `modified_at`, `modified_by`, `allday`, `id_ruangan`, `approval`, `approved_by`, `creator_id`) VALUES
-(12, 'test', 'coba', '2020-12-29 08:30:00', '2020-12-30 00:00:00', NULL, 'Vicky', NULL, NULL, 0, 1, 'APPROVED', NULL, NULL),
+(12, 'test', 'coba', '2020-12-29 08:30:00', '2020-12-30 00:00:00', NULL, 'Vicky', NULL, NULL, 0, 1, 'CANCELED', NULL, NULL),
 (14, 'test2', 'coba2', '2020-12-29 08:30:00', '2020-12-30 00:00:00', NULL, 'Vicky', NULL, NULL, 0, 2, 'APPROVED', NULL, NULL),
 (16, 'judul kegiatan', 'deskripsi', '2021-01-02 08:00:00', '2021-01-03 16:00:00', '2021-01-02 12:55:45', 'Vicky', '2021-01-02 12:55:45', 'Vicky', 0, 1, 'REJECTED', NULL, NULL),
-(17, 'test bentrol', 'deskripsi bentrol', '2021-01-04 08:00:00', '2021-01-05 16:00:00', '2021-01-02 16:27:49', 'Vicky', '2021-01-02 16:27:49', 'Vicky', 0, 1, 'PENDING', NULL, NULL),
-(18, 'rapat senin selasa', 'test', '2021-01-04 08:00:00', '2021-01-05 16:00:00', '2021-01-03 09:13:36', 'Admin', '2021-01-03 09:13:36', 'Admin', 0, 2, 'APPROVED', NULL, 1),
-(19, 'coba lagi', 'coba', '2021-01-06 08:00:00', '2021-01-06 16:00:00', '2021-01-03 09:15:35', 'Admin', '2021-01-03 09:15:35', 'Admin', 0, 2, 'REJECTED', NULL, 1);
+(17, 'test bentrol', 'deskripsi bentrol', '2021-01-04 08:00:00', '2021-01-05 16:00:00', '2021-01-02 16:27:49', 'Vicky', '2021-01-02 16:27:49', 'Vicky', 0, 1, 'CANCELED', NULL, NULL),
+(18, 'rapat senin selasa', 'test', '2021-01-04 08:00:00', '2021-01-05 16:00:00', '2021-01-03 09:13:36', 'Admin', '2021-01-03 09:13:36', 'Admin', 0, 2, 'CANCELED', NULL, 1),
+(19, 'coba lagi', 'coba', '2021-01-06 08:00:00', '2021-01-06 16:00:00', '2021-01-03 09:15:35', 'Admin', '2021-01-03 09:15:35', 'Admin', 0, 2, 'REJECTED', NULL, 1),
+(20, 'tes bulan februari', 'tes aja', '2021-02-01 08:00:00', '2021-02-01 08:00:00', '2021-01-29 19:00:35', 'Admin', '2021-01-29 19:00:35', 'Admin', 0, 1, 'REJECTED', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -108,9 +109,11 @@ CREATE TABLE `pemeliharaan` (
 --
 
 INSERT INTO `pemeliharaan` (`id_pemeliharaan`, `kode_barang`, `nama_barang`, `keterangan`, `created_by`, `created_at`, `creator_id`, `approval`, `modified_by`, `modified_at`) VALUES
-(2, '321123', 'laptop updated', 'ngehang terus', 'Vicky Vitriandi, S.Komp', '2021-01-03 16:55:07', 2, 'PENDING', 'Admin', '2021-01-03 12:04:00'),
+(2, '321123', 'laptop updated', 'ngehang terus', 'Vicky Vitriandi, S.Komp', '2021-01-03 16:55:07', 2, 'APPROVED', 'Admin', '2021-01-03 12:04:00'),
 (4, '1234', 'motor', 'ganti oli', 'Admin', '2021-01-03 18:04:25', 1, 'PENDING', NULL, NULL),
-(5, '35345345', 'mobil', 'ganti ban', 'rudi', '2021-01-03 18:16:11', 3, 'PENDING', NULL, NULL);
+(5, '35345345', 'mobil', 'ganti ban', 'rudi', '2021-01-03 18:16:11', 3, 'PENDING', NULL, NULL),
+(6, 'asd', 'asdasd', 'adad', 'Admin', '2021-01-28 06:01:38', 1, 'PENDING', NULL, NULL),
+(8, '-', 'AC Split', 'ac kurang dingin', 'ahmad', '2021-01-31 22:07:12', 7, 'PENDING', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -122,8 +125,7 @@ CREATE TABLE `persediaan` (
   `id_persediaan` int(11) NOT NULL,
   `id_persediaan_jenis` varchar(45) DEFAULT NULL,
   `nama_persediaan` varchar(45) DEFAULT NULL,
-  `jumlah_masuk` int(11) DEFAULT NULL,
-  `jumlah_keluar` int(11) DEFAULT NULL,
+  `jumlah_persediaan` int(11) DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `created_by` varchar(45) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -135,8 +137,41 @@ CREATE TABLE `persediaan` (
 -- Dumping data for table `persediaan`
 --
 
-INSERT INTO `persediaan` (`id_persediaan`, `id_persediaan_jenis`, `nama_persediaan`, `jumlah_masuk`, `jumlah_keluar`, `tanggal`, `created_by`, `created_at`, `creator_id`, `keterangan`) VALUES
-(1, '1', 'swalow', 5, NULL, '2021-01-02', 'Admin', '2021-01-03 23:38:05', 1, 'hari sabtu');
+INSERT INTO `persediaan` (`id_persediaan`, `id_persediaan_jenis`, `nama_persediaan`, `jumlah_persediaan`, `tanggal`, `created_by`, `created_at`, `creator_id`, `keterangan`) VALUES
+(1, '1', 'swalow', 2, '2021-01-02', 'Admin', '2021-01-03 23:38:05', 1, 'hari sabtu'),
+(2, '1', 'sinar dunia', 90, '2021-01-10', 'Admin', '2021-01-10 21:10:59', 1, '-'),
+(3, '3', 'Buku Tulis', NULL, '2021-01-22', 'Admin', '2021-01-22 10:56:55', 1, '-'),
+(4, '4', 'pilot', 20, '2021-01-22', 'Admin', '2021-01-22 13:30:51', 1, '-'),
+(5, '4', 'ball liner', 5, '2021-01-22', 'Admin', '2021-01-22 13:32:12', 1, '-'),
+(6, '5', 'garuda', 1500, '2021-01-31', 'Admin', '2021-01-31 15:42:56', 1, '-');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `persediaan_history`
+--
+
+CREATE TABLE `persediaan_history` (
+  `id_persediaan_history` int(11) NOT NULL,
+  `id_persediaan` int(11) DEFAULT NULL,
+  `jenis_transaksi` enum('MASUK','KELUAR') DEFAULT NULL,
+  `tgl_pembelian` date DEFAULT NULL,
+  `tgl_transaksi` datetime DEFAULT CURRENT_TIMESTAMP,
+  `id_user` int(11) DEFAULT NULL,
+  `jumlah` int(11) DEFAULT NULL,
+  `keterangan` varchar(100) DEFAULT NULL,
+  `created_by` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `persediaan_history`
+--
+
+INSERT INTO `persediaan_history` (`id_persediaan_history`, `id_persediaan`, `jenis_transaksi`, `tgl_pembelian`, `tgl_transaksi`, `id_user`, `jumlah`, `keterangan`, `created_by`) VALUES
+(3, 3, 'MASUK', '2021-01-22', '2021-01-22 11:40:56', 1, 100, '-', 'Admin'),
+(4, 4, 'MASUK', '2021-01-22', '2021-01-22 13:46:18', 1, 10, 'apa saja', 'Admin'),
+(5, 4, 'MASUK', '2021-01-22', '2021-01-22 13:50:29', 1, 15, '-', 'Admin'),
+(6, 6, 'MASUK', '2021-01-31', '2021-01-31 15:42:56', 1, 1500, '-', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -159,7 +194,60 @@ INSERT INTO `persediaan_jenis` (`id_persediaan_jenis`, `jenis_persediaan`, `satu
 (1, 'Kertas A4', 'rim', 'Ukuran 80gr'),
 (2, 'Kertas F4', 'rim', NULL),
 (3, 'Buku', 'pak', 'Ukuran A5'),
-(4, 'Pulpen', 'Lusin', '');
+(4, 'Pulpen', 'Lusin', ''),
+(5, 'STOPMAP', 'pak', 'uk. folio');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `persediaan_transaksi`
+--
+
+CREATE TABLE `persediaan_transaksi` (
+  `id_persediaan_transaksi` int(11) NOT NULL,
+  `jenis_transaksi` enum('MASUK','KELUAR') DEFAULT NULL,
+  `tgl_transaksi` datetime DEFAULT CURRENT_TIMESTAMP,
+  `id_user` int(11) DEFAULT NULL,
+  `keterangan` varchar(100) DEFAULT NULL,
+  `status_transaksi` varchar(45) DEFAULT NULL,
+  `tgl_approval` datetime DEFAULT NULL,
+  `tgl_diterima` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `persediaan_transaksi`
+--
+
+INSERT INTO `persediaan_transaksi` (`id_persediaan_transaksi`, `jenis_transaksi`, `tgl_transaksi`, `id_user`, `keterangan`, `status_transaksi`, `tgl_approval`, `tgl_diterima`) VALUES
+(1, 'KELUAR', '2021-01-20 13:26:03', 1, 'umum dan kepegawaian', 'APPROVED', '2021-01-31 15:12:57', NULL),
+(2, 'KELUAR', '2021-01-22 06:17:35', 1, 'keterangan', 'APPROVED', '2021-01-31 15:13:41', NULL),
+(3, 'KELUAR', '2021-01-31 21:49:33', 7, 'Seksi Anu', 'PENDING', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `persediaan_transaksi_detail`
+--
+
+CREATE TABLE `persediaan_transaksi_detail` (
+  `id_persediaan_transaksi_detail` int(11) NOT NULL,
+  `id_persediaan_transaksi` int(11) DEFAULT NULL,
+  `id_persediaan` int(11) DEFAULT NULL,
+  `jumlah_permintaan` int(11) DEFAULT '0',
+  `jumlah_disetujui` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `persediaan_transaksi_detail`
+--
+
+INSERT INTO `persediaan_transaksi_detail` (`id_persediaan_transaksi_detail`, `id_persediaan_transaksi`, `id_persediaan`, `jumlah_permintaan`, `jumlah_disetujui`) VALUES
+(3, 1, 1, 2, 3),
+(4, 2, 2, 19, 10),
+(5, 2, 4, 5, 5),
+(6, 2, 5, 2, 5),
+(7, 3, 2, 20, 0),
+(8, 3, 4, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -201,8 +289,10 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`id_role`, `role_name`) VALUES
 (1, 'SUPERADMIN'),
-(2, 'ADMIN'),
-(3, 'PENGGUNA');
+(2, 'ADMINRUANG'),
+(3, 'ADMINASET'),
+(4, 'ADMINSUPPLY'),
+(5, 'USER');
 
 -- --------------------------------------------------------
 
@@ -224,7 +314,8 @@ CREATE TABLE `ruangan` (
 
 INSERT INTO `ruangan` (`id_ruangan`, `kode_ruangan`, `nama_ruangan`, `kapasitas`, `keterangan`) VALUES
 (1, 'AULA1', 'Aula Dinas kesehatan lantai 1', 49, 'ini keterangan'),
-(2, 'AULA 2', 'aula 2', 150, 'blablabla');
+(2, 'AULA 2', 'aula 2', 150, 'blablabla'),
+(3, 'AULA3', 'nama ruangan aula 3', 200, 'bla bla bla');
 
 -- --------------------------------------------------------
 
@@ -256,19 +347,20 @@ CREATE TABLE `tbl_login` (
   `id` int(10) NOT NULL,
   `username` varchar(8) NOT NULL,
   `password` varchar(10) NOT NULL,
-  `nip` varchar(18) DEFAULT NULL,
   `nama` varchar(50) DEFAULT NULL,
-  `role` tinyint(1) NOT NULL
+  `role` varchar(45) NOT NULL DEFAULT 'PENGGUNA'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_login`
 --
 
-INSERT INTO `tbl_login` (`id`, `username`, `password`, `nip`, `nama`, `role`) VALUES
-(1, 'admin', 'admin123', NULL, 'Admin', 1),
-(2, 'rommonz', '12345', '19888888888888888', 'Vicky Vitriandi, S.Komp', 3),
-(3, '19850618', 'rudi', NULL, 'rudi', 3);
+INSERT INTO `tbl_login` (`id`, `username`, `password`, `nama`, `role`) VALUES
+(1, 'admin', 'adminadmin', 'vicky', 'SUPERADMIN'),
+(2, 'rommonz', '12345', 'Vicky Vitriandi, S.Komp', 'ADMINRUANG'),
+(3, '19850618', 'rudi', 'rudi', 'PENGGUNA'),
+(7, 'gie', 'ahmad', 'ahmad', 'USER'),
+(8, 'gege', 'gege', 'gege', 'ADMINRUANG');
 
 -- --------------------------------------------------------
 
@@ -292,23 +384,6 @@ CREATE TABLE `tbl_pinjambarang` (
 
 INSERT INTO `tbl_pinjambarang` (`id_pb`, `no_pb`, `no_spt`, `tanggal`, `nama1`, `nama2`, `tujuan`) VALUES
 (7, '1', 'asdasd', '2020-12-21', 'adasd', 'asdads', 'asdasd');
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `view_barang`
---
-CREATE TABLE `view_barang` (
-);
-
--- --------------------------------------------------------
-
---
--- Structure for view `view_barang`
---
-DROP TABLE IF EXISTS `view_barang`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_barang`  AS  select `a`.`id_pb` AS `id_pb`,`a`.`id_barang` AS `id_barang`,`b`.`kode_barang` AS `kode_barang`,`b`.`nama_barang` AS `nama_barang`,`b`.`merk` AS `merk`,`b`.`no_seri` AS `no_seri`,`b`.`kondisi_barang` AS `kondisi_barang`,`a`.`unit` AS `unit`,`a`.`keterangan` AS `keterangan` from (`tbl_detailpb` `a` join `tb_barang` `b`) where (`a`.`id_barang` = `b`.`id_barang`) ;
 
 --
 -- Indexes for dumped tables
@@ -340,10 +415,28 @@ ALTER TABLE `persediaan`
   ADD PRIMARY KEY (`id_persediaan`);
 
 --
+-- Indexes for table `persediaan_history`
+--
+ALTER TABLE `persediaan_history`
+  ADD PRIMARY KEY (`id_persediaan_history`);
+
+--
 -- Indexes for table `persediaan_jenis`
 --
 ALTER TABLE `persediaan_jenis`
   ADD PRIMARY KEY (`id_persediaan_jenis`);
+
+--
+-- Indexes for table `persediaan_transaksi`
+--
+ALTER TABLE `persediaan_transaksi`
+  ADD PRIMARY KEY (`id_persediaan_transaksi`);
+
+--
+-- Indexes for table `persediaan_transaksi_detail`
+--
+ALTER TABLE `persediaan_transaksi_detail`
+  ADD PRIMARY KEY (`id_persediaan_transaksi_detail`);
 
 --
 -- Indexes for table `pinjam_ruangan`
@@ -399,22 +492,37 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `calendar`
 --
 ALTER TABLE `calendar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `pemeliharaan`
 --
 ALTER TABLE `pemeliharaan`
-  MODIFY `id_pemeliharaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pemeliharaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `persediaan`
 --
 ALTER TABLE `persediaan`
-  MODIFY `id_persediaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_persediaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `persediaan_history`
+--
+ALTER TABLE `persediaan_history`
+  MODIFY `id_persediaan_history` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `persediaan_jenis`
 --
 ALTER TABLE `persediaan_jenis`
-  MODIFY `id_persediaan_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_persediaan_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `persediaan_transaksi`
+--
+ALTER TABLE `persediaan_transaksi`
+  MODIFY `id_persediaan_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `persediaan_transaksi_detail`
+--
+ALTER TABLE `persediaan_transaksi_detail`
+  MODIFY `id_persediaan_transaksi_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `pinjam_ruangan`
 --
@@ -424,17 +532,17 @@ ALTER TABLE `pinjam_ruangan`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `ruangan`
 --
 ALTER TABLE `ruangan`
-  MODIFY `id_ruangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_ruangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_pinjambarang`
 --
