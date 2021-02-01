@@ -36,6 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </header><!-- /header -->
         <!-- Header-->
 		<div class="container">
+          <?php $this->load->view('flashdata') ?>
                     <div class="card">
                       <div class="card-header">
                         <strong>Edit Profil</strong>
@@ -52,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                           <div class="row form-group">
                                <div class="col col-md-3"><label for="nb" class=" form-control-label">Nama Pegawai</label></div>
-                               <div class="col-12 col-md-9"><input type="text" id="nama_pengguna" value="<?php echo $this->session->userdata('nama') ?>" name="nama_pengguna" placeholder="Nama Pegawai" class="form-control" required></div>
+                               <div class="col-12 col-md-9"><input type="text" id="nama_pengguna" value="<?php echo $profil->nama ?>" name="nama" placeholder="Nama Pegawai" class="form-control" required></div>
                           </div>
 
                           <div class="row form-group">
@@ -81,40 +82,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         </div>
     </div>
-
-
-
-
-    <script src="<?php echo base_url('assets/js/vendor/jquery-2.1.4.min.js');?>"</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/main.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/lib/chart-js/Chart.bundle.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/dashboard.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/widgets.js')?>"></script>
-    <script src="<?php echo base_url('assets/js/lib/vector-map/jquery.vmap.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/lib/vector-map/jquery.vmap.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/lib/vector-map/jquery.vmap.sampledata.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/lib/vector-map/country/jquery.vmap.world.js');?>"></script>
-    <script>
-        ( function ( $ ) {
-            "use strict";
-
-            jQuery( '#vmap' ).vectorMap( {
-                map: 'world_en',
-                backgroundColor: null,
-                color: '#ffffff',
-                hoverOpacity: 0.7,
-                selectedColor: '#1de9b6',
-                enableZoom: true,
-                showTooltip: true,
-                values: sample_data,
-                scaleColors: [ '#1de9b6', '#03a9f5' ],
-                normalizeFunction: 'polynomial'
-            } );
-        } )( jQuery );
-    </script>
-
+<?php $this->load->view('foot'); ?>
 </body>
 
 </html>

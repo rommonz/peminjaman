@@ -60,15 +60,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
 
                  <div class="card-body">
-                  <table id="tabelPeminjaman" class="table table-striped table-bordered">
+                  <table id="tabelPemeliharaan" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                           <th>No</th>
                           <th>Kode Barang</th>
                           <th>Nama Barang</th>
                           <th>Keterangan</th>
-                          <th>Dibuat oleh</th>
-                          <th>Tanggal Pengajuan</th>
+                          <th>Dibuat oleh / Tanggal</th>
+
                           <th>Approval</th>
                           <th>Action</th>
                         </tr>
@@ -82,9 +82,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<td><?php echo $pr->kode_barang ?></td>
 						<td><?php echo $pr->nama_barang ?></td>
 						<td><?php echo $pr->keterangan ?></td>
-						<td><?php echo $pr->created_by ?></td>
-						<td><?php echo $pr->created_at ?></td>
-            <td class=""><?php echo $pr->approval ?></td>
+						<td><?php echo $pr->created_by."<br/>".$pr->created_at ?></td>
+						<td class=""><?php echo $pr->approval ?></td>
             <td>
               <a class="btn btn-warning btn-sm" href="<?php echo site_url('pemeliharaan/edit/'.$pr->id_pemeliharaan);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
               <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $pr->id_pemeliharaan; ?>" onclick="confirm_modal('<?php echo site_url('pemeliharaan/hapus/'.$pr->id_pemeliharaan);?>','hapus');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
@@ -128,7 +127,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php $this->load->view('foot') ?>
             <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
             <!-- script src="< ?php echo base_url('assets/js/main.js');?>"></script -->
-
+            <script>
+              jQuery(document).ready(function(){
+                jQuery("#tabelPemeliharaan").dataTable();
+              });
+            </script>
 
 						<script>
             function confirm_modal(delete_url,title)

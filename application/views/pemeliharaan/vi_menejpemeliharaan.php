@@ -60,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
 
                  <div class="card-body">
-                  <table id="tabelPeminjaman" class="table table-striped table-bordered">
+                  <table id="tabelPemeliharaan" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                           <th>No</th>
@@ -133,11 +133,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
   </div>
             <?php $this->load->view('foot') ?>
-            <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
-            <!-- script src="< ?php echo base_url('assets/js/main.js');?>"></script -->
-
-
-
+          <script>
+            jQuery(document).ready(function(){
+              jQuery("#tabelPemeliharaan").dataTable();
+            })
+          </script>
 					<script>
 
                       function proses(status){

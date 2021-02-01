@@ -60,6 +60,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Keterangan</label></div>
                             <div class="col-12 col-md-9"><textarea id="keterangan" name="keterangan" placeholder="Keterangan Pemeliharaan" class="form-control" ></textarea></div>
                           </div>
+
+                          <div class="row form-group">
+                            <div class="col col-md-3"><label for="foto" class=" form-control-label">Foto</label></div>
+                            <div class="col-12 col-md-9"><input type="file"  id="foto" name="foto" placeholder="foto" class="form-control" ></div>
+                          </div>
+                          
 						  <div class="row form-group">
 						    <div class="col col-md-3"></div>
 							<div class="col-12 col-md-9">

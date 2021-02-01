@@ -69,12 +69,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <a class="btn btn-primary" onclick="window.location.replace('<?php echo base_url('pinjam/menejpinjamruangan/') ?>'+'?r='+$('#pilihruangan').val() +'&'+'s='+$('#status').val())" >GO</a>
                           </div>
                         </div>
-
+                      </div>
                  <div class="card-body">
                   <table id="tabelPeminjaman" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-
                         <th>Judul</th>
                         <th>Deskripsi</th>
                         <th>Ruangan</th>
@@ -142,9 +141,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</div>
 
             <?php $this->load->view('foot') ?>
-            <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
+            <!-- script src="< ?php echo base_url('assets/js/plugins.js');?>"></script -->
             <!-- script src="< ?php echo base_url('assets/js/main.js');?>"></script -->
-
+            <script>
+              jQuery(document).ready(function(){
+                jQuery("#tabelPeminjaman").dataTable();
+              })
+            </script>
 
 						<script>
 

@@ -61,21 +61,22 @@ class Admin extends CI_Controller{
   }
 
 	public function penggunaupdate(){
-		//echo "<pre/>";
-		//print_r($this->input->post());
-		$datapost['nip'] = $this->input->post('nip');
-		$datapost['username'] = $this->input->post('username');
+
 		$datapost['nama'] = $this->input->post('nama');
 		if($this->input->post('password') != '' ){
 			$datapost['password'] = $this->input->post('password');
 		}
 		$datapost['role'] = $this->input->post('role');
 		$where = Array('id'=>$this->input->post('id'));
-
-		if($this->mo_login->update_pengguna($where,$datapost)){
+		
+		if($this->db->update('tbl_login',$datapost, $where)){
+			$this->session->set_flashdata('state','success');
+			$this->session->set_flashdata('msg','update berhasil');
 			redirect('admin/pengguna');
 		}else{
-			echo "gagal";
+			$this->session->set_flashdata('state','danger');
+			$this->session->set_flashdata('msg','update profil gagal');
+			redirect('admin/pengguna');
 		}
 
 	}

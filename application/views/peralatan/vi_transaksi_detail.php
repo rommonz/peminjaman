@@ -225,7 +225,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   }
 
   function cetak(id_transaksi){
-    alert(id_transaksi);
+    var w = window.open('<?php echo base_url('peralatan/cetakpermohonan/') ?>'+id_transaksi, 'thePopup', 'width=800,height=800');
+    //e.preventDefault();
+    //var w = window.open();
+    //w.document.write('<?php echo base_url('peralatan/cetakpermohonan/') ?>'+id_transaksi);
+    w.window.print();
+    w.document.close();
+    return false;
   }
 </script>
 

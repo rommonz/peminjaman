@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       </div>
                 <div class="card-body card-block">
 					<div class="bootstrap-iso">
-                        <form action="<?php echo base_url('peralatan/savepersediaan'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <form action="<?php echo base_url('peralatanadmin/savepersediaan'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
 						  <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Jenis Persediaan</label></div>
                             <div class="col col-md-9">

@@ -41,10 +41,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Daftar Jenis Persediaan</strong>
-                            <span><a  class="btn btn-primary" href="<?php echo base_url('peralatan/addjenispersediaan') ?>"><i class="fa fa-plus"></i> ADD NEW</a></span>
+                            <span><a  class="btn btn-primary" href="<?php echo base_url('peralatanadmin/addjenispersediaan') ?>"><i class="fa fa-plus"></i> ADD NEW</a></span>
                         </div>
                   <div class="card-body">
-                  <table id="tabelPeminjaman" class="table table-striped table-bordered">
+                  <table id="tabelJenisPersediaan" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                           <th>No</th>
@@ -64,8 +64,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <td><?php echo $pr->satuan ?></td>
 						<td><?php echo $pr->keterangan ?></td>
 						<td>
-              <a class="btn btn-warning btn-sm" href="<?php echo site_url('peralatan/editjenispersediaan/'.$pr->id_persediaan_jenis);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
-              <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $pr->id_persediaan_jenis; ?>" onclick="confirm_modal('<?php echo site_url('pemeliharaan/hapus/'.$pr->id_persediaan_jenis);?>','hapus');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
+              <a class="btn btn-warning btn-sm" href="<?php echo site_url('peralatanadmin/editjenispersediaan/'.$pr->id_persediaan_jenis);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
+              <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $pr->id_persediaan_jenis; ?>" onclick="confirm_modal('<?php echo site_url('peralatanadmin/hapusjenispersediaan/'.$pr->id_persediaan_jenis);?>','hapus');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
 						</td>
 						</tr>
 
@@ -104,10 +104,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 
             <?php $this->load->view('foot') ?>
-            <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
-            <!-- script src="< ?php echo base_url('assets/js/main.js');?>"></script -->
-
-
+            <script>
+              jQuery(document).ready(function(){
+                jQuery("#tabelJenisPersediaan").dataTable();
+              })
+            </script>
 						<script>
             function confirm_modal(delete_url,title)
             {

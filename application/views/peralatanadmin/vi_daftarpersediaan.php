@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
                     <div class="header-left">
-                    <h3>Jenis Persediaan</h3>
+                    <h3>Daftar Persediaan Peralatan</h3>
                     </div>
 				</div>
 			</div>
@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span><a  class="btn btn-primary" href="<?php echo base_url('peralatanadmin/addpersediaan') ?>"><i class="fa fa-plus"></i> ADD NEW</a></span>
                         </div>
                   <div class="card-body">
-                  <table id="tabelPeminjaman" class="table table-striped table-bordered">
+                  <table id="tabelPersediaan" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                           <th>No</th>
@@ -106,9 +106,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 
             <?php $this->load->view('foot') ?>
-            <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
-            <!-- script src="< ?php echo base_url('assets/js/main.js');?>"></script -->
-
+            <script>
+              jQuery(document).ready(function(){
+                jQuery("#tabelPersediaan").dataTable();
+              })
+            </script>
 
 						<script>
             function confirm_modal(delete_url,title)

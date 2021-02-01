@@ -7,28 +7,6 @@ class Peralatan extends CI_Controller{
     $this->load->model('Mo_persediaan','persediaan');
   }
 
-  function daftarjenispersediaan(){
-    $data['jenis_persediaan'] = $this->db->get('persediaan_jenis')->result();
-    $this->load->view('peralatan/vi_daftarjenispersediaan', $data);
-  }
-
-  function addjenispersediaan(){
-    $this->load->view('peralatan/vi_addjenispersediaan');
-  }
-
-  function savejenispersediaan(){
-    $data = array('jenis_persediaan'=>$this->input->post('txtjenispersediaan'),
-                    'satuan'=>$this->input->post('satuan'),
-                    'keterangan'=>$this->input->post('keterangan'));
-    if($this->db->insert('persediaan_jenis', $data)){
-      redirect('peralatan/daftarjenispersediaan');
-    }else{
-      redirect('peralatan/addjenispersediaan');
-    }
-  }
-
-
-
 
   function lop(){
     $data['daftar_persediaan'] = $this->persediaan->get_persediaan();
@@ -37,22 +15,7 @@ class Peralatan extends CI_Controller{
   }
 
 
-  function savepersediaan(){
-    $data = array('id_persediaan_jenis'=>$this->input->post('jenis_persediaan'),
-                    'nama_persediaan'=>$this->input->post('nama_persediaan'),
-                     'jumlah_persediaan'=>$this->input->post('jumlah_masuk'),
-                      'tanggal'=>$this->input->post('tanggal'),
-                    'keterangan'=>$this->input->post('keterangan'),
-                    'created_by'=>$this->session->userdata('nama'),
-                    'creator_id'=>$this->session->userdata('id'));
-    if($this->db->insert('persediaan',$data)){
-      $id_persediaan = $this->db->insert_id();
-      $datatransaksi = array('');
-      redirect('peralatanadmin/daftarpersediaan');
-    }else{
-      redirect('peralatanadmin/addpersediaan');
-    }
-  }
+
 
 /*
   function editpersediaan($id_persediaan){
@@ -65,7 +28,8 @@ class Peralatan extends CI_Controller{
   * transaksi dari persediaan
   */
   function transaksi(){
-    $data['transaksi'] = $this->persediaan->get_transaksi();
+    //print_r($this->session->userdata());exit;
+    $data['transaksi'] = $this->persediaan->get_list_transaksi();
     $this->load->view('peralatan/vi_transaksi',$data);
   }
 
@@ -137,6 +101,14 @@ class Peralatan extends CI_Controller{
         echo "FAILED";
       }
 
+    }
+
+    public function cetakpermohonan($id_transaksi){
+
+      $data['transaksi'] = $this->persediaan->get_transaksi($id_transaksi);
+      $data['detail'] = $this->persediaan->get_transaksi_detail($id_transaksi);
+
+      $this->load->view('peralatan/cetak_permohonan',$data);
     }
 
 }

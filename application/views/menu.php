@@ -16,7 +16,7 @@
                 <li class="<?php echo $this->uri->segment(2) == 'index' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('admin/index')?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard</a>
                 </li>
-                <?php if($this->session->userdata('role') <= 2) : ?>
+                <?php if($this->session->userdata('role') != 'USER') : ?>
 
                 <li class="menu-item-has-children dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-keyboard-o"></i>Master</a>
@@ -24,30 +24,59 @@
                     <li class="<?php echo $this->uri->segment(2) == 'pengguna' ? 'active' : '' ?>">
                         <a href="<?php echo site_url('admin/pengguna')?>"> <i class="fa fa-users"></i>Daftar Pengguna</a>
                     </li>
-                    <li class="<?php echo $this->uri->segment(2) == 'daftarruangan' ? 'active' : '' ?>">
-                        <a href="<?php echo site_url('ruangan/daftarruangan')?>"> <i class="fa fa-map-marker"></i>Daftar Ruangan</a>
-                    </li>
-                    <li class="<?php echo $this->uri->segment(2) == 'daftarbarang' ? 'active' : '' ?>">
-                        <a href="<?php echo site_url('barang/daftarbarang')?>"> <i class="fa fa-laptop"></i>Daftar Barang</a>
-                    </li>
-                    <li class="<?php echo $this->uri->segment(2) == 'daftarjenispersediaan' ? 'active' : '' ?>">
-                        <a href="<?php echo site_url('peralatan/daftarjenispersediaan')?>"> <i class="fa fa-tags"></i>Jenis Persediaan</a>
-                    </li>
+
+
                   </ul>
                 </li>
               <!-- end master menu -->
               <?php endif; ?>
-              <?php if($this->session->userdata('role') <= 2) : ?>
-                <h3 class="menu-title">Manajemen </h3><!-- /.menu-title -->
-                <li class="<?php echo $this->uri->segment(2) == 'menejpinjamruangan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('pinjam/menejpinjamruangan')?>"> <i class="menu-icon fa fa-file-o"></i>Manajemen Ruangan</a>
+              <?php if($this->session->userdata('role') != 'USER') : ?>
+                <h3 class="menu-title">ADMIN </h3><!-- /.menu-title -->
+                <?php if($this->session->userdata('role') == 'ADMINRUANG' || $this->session->userdata('role') == 'SUPERADMIN' ) : ?>
+                  <li class="menu-item-has-children dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-keyboard-o"></i>Manajemen Ruangan</a>
+                      <ul class="sub-menu children dropdown-menu">
+                        <li class="<?php echo $this->uri->segment(2) == 'daftarruangan' ? 'active' : '' ?>">
+                            <a href="<?php echo site_url('ruangan/daftarruangan')?>"> <i class="fa fa-map-marker"></i>Daftar Ruangan</a>
+                        </li>
+                        <li class="<?php echo $this->uri->segment(2) == 'daftarbarang' ? 'active' : '' ?>">
+                            <a href="<?php echo site_url('barang/daftarbarang')?>"> <i class="fa fa-laptop"></i>Daftar Barang</a>
+                        </li>
+
+                        <li class="<?php echo $this->uri->segment(2) == 'menejpinjamruangan' ? 'active' : '' ?>">
+                            <!-- a href="<?php //echo site_url('pinjam/menejpinjamruangan')?>"> <i class="menu-icon fa fa-file-o"></i>Peminjaman</a -->
+                            <a href="<?php echo site_url('pinjam/menejpinjamruangan')?>"> <i class="fa fa-file-o"></i>Peminjaman</a>
+                        </li>
+                      </ul>
+                    </li>
+                <?php endif; ?>
+                <?php if($this->session->userdata('role') == 'ADMINASET' || $this->session->userdata('role') == 'SUPERADMIN' ) : ?>
+                  <li class="menu-item-has-children dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-keyboard-o"></i>Manajemen Asset</a>
+                      <ul class="sub-menu children dropdown-menu">
+                        <li class="<?php echo $this->uri->segment(2) == 'menejpemeliharaan' ? 'active' : '' ?>">
+                            <a href="<?php echo site_url('pemeliharaan/menejpemeliharaan')?>"> <i class="fa fa-file-o"></i>Pemeliharaan</a>
+                        </li>
+                      </ul>
+                    </li>
+              <?php endif; ?>
+              <?php if($this->session->userdata('role') == 'ADMINSUPPLY' || $this->session->userdata('role') == 'SUPERADMIN' ) : ?>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-keyboard-o"></i>Manajemen Persediaan</a>
+                    <ul class="sub-menu children dropdown-menu">
+                      <li class="<?php echo $this->uri->segment(2) == 'daftarjenispersediaan' ? 'active' : '' ?>">
+                          <a href="<?php echo site_url('peralatanadmin/daftarjenispersediaan')?>"> <i class="fa fa-tags"></i>Jenis Persediaan</a>
+                      </li>
+                      <li class="<?php echo $this->uri->segment(2) == 'permohonanpersediaan' ? 'active' : '' ?>">
+                        <a href="<?php echo site_url('peralatanadmin/listpermohonan')?>"> <i class="fa fa-map-marker"></i>Permohonan</a>
+                      </li>
+                      <li class="<?php echo $this->uri->segment(2) == 'daftarpersediaan' ? 'active' : '' ?>">
+                        <a href="<?php echo site_url('peralatanadmin/daftarpersediaan')?>"> <i class="fa fa-map-marker"></i>Stok Barang</a>
+                      </li>
+                    </ul>
+
                 </li>
-                <li class="<?php echo $this->uri->segment(2) == 'menejpemeliharaan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('pemeliharaan/menejpemeliharaan')?>"> <i class="menu-icon fa fa-file-o"></i>Manajemen Asset</a>
-                </li>
-                <li class="<?php echo $this->uri->segment(2) == 'daftarpersediaan' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('peralatanadmin/daftarpersediaan')?>"> <i class="menu-icon fa fa-camera-retro"></i>Manajemen Peralatan</a>
-                </li>
+              <?php endif; ?>
               <?php endif; ?>
                 <!-- for user -->
                 <h3 class="menu-title">Form </h3><!-- /.menu-title -->

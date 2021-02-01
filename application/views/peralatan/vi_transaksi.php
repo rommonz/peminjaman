@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
                     <div class="header-left">
-                    <h3>Jenis Persediaan</h3>
+                    <h3>Permohonan Barang Persediaan</h3>
                     </div>
 				</div>
 			</div>
@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Persediaan Peralatan dan Perlengkapan</strong>
+                            <strong class="card-title"></strong>
                             <span>
                             <a class="btn btn-primary btn-sm" onclick="confirm_modal('<?php echo site_url('peralatan/addtransaksi'); ?>')"><i class="fa fa-edit"></i> Buat Transaksi Baru </a>
                             </span>
@@ -110,9 +110,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 
             <?php $this->load->view('foot') ?>
-            <script src="<?php echo base_url('assets/js/plugins.js');?>"></script>
+            <!-- script src="< ?php echo base_url('assets/js/plugins.js');?>"></script -->
             <!-- script src="< ?php echo base_url('assets/js/main.js');?>"></script -->
-
+            <script>
+              jQuery(document).ready(function(){
+                jQuery("#tabelPeminjaman").dataTable();
+              });
+            </script>
 
 						<script>
             function confirm_modal(url)
