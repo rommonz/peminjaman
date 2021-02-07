@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
                     <div class="header-left">
-                    <h3>Daftar Pengguna</h3>
+                    <h3>Unit Kerja</h3>
                     </div>
 				</div>
 			</div>
@@ -41,35 +41,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title">Daftar Pengguna</strong>
+                                    <strong class="card-title">Daftar Unit Kerja</strong>
                                 </div>
                                 <div class="card-header">
-                                <a class="btn btn-primary btn-sm" href="<?php echo site_url('admin/addpengguna') ?>" ><i class="fa fa-pencil"></i> Add New</a>
+                                <a class="btn btn-primary btn-sm" href="<?php echo site_url('admin/addunitkerja') ?>" ><i class="fa fa-pencil"></i> Add New</a>
                               </div>
 
                          <div class="card-body">
                           <table id="table-pengguna" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                <th>Nama</th>
-                                <th>Username</th>
-                                <th>Role</th>
+                                <th>Nama Unit Kerja</th>
+                                <th>Ordinat</th>
+                                <th>Keterangan</th>
                                 <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                     						<?php
-                    						foreach($daftar_pengguna as $peg){
+                    						foreach($daftar_unitkerja as $uk){
                     						?>
                     						<tr>
-                                <td><?php echo $peg->nama ?></td>
-                    						<td><?php echo $peg->username ?></td>
-                                <td><?php echo $peg->role ?></td>
+                                <td><?php echo $uk->nama_unit_kerja ?></td>
+                    						<td><?php echo $uk->ordinat ?></td>
+                                <td><?php echo $uk->keterangan ?></td>
                     						<td>
-                                  <a class="btn btn-warning btn-sm" href="<?php echo site_url('admin/editpengguna/'.$peg->id);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
-                                  <?php if($peg->role != 'SUPERADMIN') { ?>
-                                  <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $peg->id; ?>" onclick="confirm_modal('<?php echo site_url('admin/hapususer/'.$peg->id);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
-                                <?php } ?>
+                                  <a class="btn btn-warning btn-sm" href="<?php echo site_url('admin/editunitkerja/'.$uk->id_unit_kerja);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
+                                  <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $uk->id_unit_kerja; ?>" onclick="confirm_modal('<?php echo site_url('admin/hapusunitkerja/'.$uk->id_unit_kerja);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
                                 </td>
                     						</tr>
 

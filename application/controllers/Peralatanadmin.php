@@ -173,5 +173,13 @@ class Peralatanadmin extends CI_Controller{
 
   }
 
+  public function cetakpermohonan($id_transaksi){
+
+    $data['transaksi'] = $this->persediaan->get_transaksi($id_transaksi);
+    $data['detail'] = $this->persediaan->get_transaksi_detail($id_transaksi);
+
+    $this->load->view('peralatan/cetak_permohonan',$data);
+  }
+
 
 }

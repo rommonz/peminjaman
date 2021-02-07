@@ -30,14 +30,20 @@
   </tbody>
 </table>
   <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Batal</button>
-  <button type="button" class="btn btn-primary btn-sm acc" onclick="prosespersetujuan(<?php echo $transaksi->id_persediaan_transaksi ?>)">Proses</button>
+  <button type="button" class="btn btn-primary btn-sm acc" id="btnProses" onclick="prosespersetujuan(<?php echo $transaksi->id_persediaan_transaksi ?>)">Proses</button>
+  <button type="button" class="btn btn-primary btn-sm print" id="btnCetak" onclick="cetak(<?php echo $transaksi->id_persediaan_transaksi ?>)">Cetak Form</button>
 
 <script>
 
   jQuery(document).ready(function(){
     var status = '<?php echo $transaksi->status_transaksi ?>';
     if(status != 'PENDING'){
-    jQuery(".acc").prop("disabled", true);
+      jQuery(".acc").prop("disabled", true);
+      jQuery("#btnProses").hide();
+    }
+
+    if(status != 'APPROVED'){
+      jQuery("#btnCetak").hide();
     }
   })
 
@@ -63,4 +69,13 @@
 
     }
   }
+
+    function cetak(id_transaksi){
+
+      var w = window.open('<?php echo base_url('peralatanadmin/cetakpermohonan/') ?>'+id_transaksi, 'thePopup', 'width=800,height=800');
+      w.window.print();
+      w.document.close();
+      return false;
+    }
+
 </script>

@@ -110,7 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     </div>
                     <div class="col-md-3">
-                      <img src="<?php echo base_url('assets/uploads/'.$detail->foto) ?>" width="300" alt="foto barang">
+                      <img src="<?php echo $detail->foto ? base_url('assets/uploads/'.$detail->foto) : base_url('assets/uploads/default.jpg') ?>" width="300" alt="foto barang">
                     </div>
                     </div>
                         </form>

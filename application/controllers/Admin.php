@@ -68,7 +68,7 @@ class Admin extends CI_Controller{
 		}
 		$datapost['role'] = $this->input->post('role');
 		$where = Array('id'=>$this->input->post('id'));
-		
+
 		if($this->db->update('tbl_login',$datapost, $where)){
 			$this->session->set_flashdata('state','success');
 			$this->session->set_flashdata('msg','update berhasil');
@@ -81,5 +81,36 @@ class Admin extends CI_Controller{
 
 	}
 
+	public function unitkerja(){
+		//$data['daftar_unitkerja'] = $this->db->get('unit_kerja')->result();
+		$sql = "select uk.*, uk2.nama_unit_kerja as ordinat from unit_kerja uk left join unit_kerja uk2 on uk2.id_unit_kerja = uk.id_ordinat";
+		$data['daftar_unitkerja'] = $this->db->query($sql)->result();
+		$this->load->view('admin/vi_daftar_unitkerja',$data);
+
+	}
+
+	function addunitkerja(){
+		$data['daftar_unitkerja'] = $this->db->get('unit_kerja')->result();
+		$this->load->view('admin/vi_addunitkerja',$data);
+	}
+
+	function unitkerjasave(){
+		if($this->input->post('save')){
+				$datainsert = array('nama_unit_kerja'=>$this->input->post('nama_unit_kerja'),
+														'id_ordinat'=>$this->input->post('id_ordinat'),
+														'keterangan'=>$this->input->post('keterangan')
+														);
+
+				if($this->db->insert('unit_kerja',$datainsert)){
+					$this->session->set_flashdata('state','success');
+					$this->session->set_flashdata('msg','DATA TERSIMPAN');
+					redirect('admin/unitkerja');
+				}else{
+					$this->session->set_flashdata('state','danger');
+					$this->session->set_flashdata('msg','GAGAL MENYIMPAN');
+					redirect('admin/unitkerja');
+				}
+			}
+	}
 
 }
