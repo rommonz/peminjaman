@@ -113,4 +113,44 @@ class Admin extends CI_Controller{
 			}
 	}
 
+
+	/**
+	 *
+	 * Pagu Makan Minum
+	 */
+	 function pagumamin(){
+		 // $data['daftar_pagu'] = $this->db->get('pagu_mamin')->result();
+		 $sql = "select pg.*, uk.nama_unit_kerja from pagu_mamin pg inner join unit_kerja uk on uk.id_unit_kerja = pg.id_unit_kerja";
+		 $data['daftar_pagu'] = $this->db->query($sql)->result();
+		 $this->load->view('admin/vi_daftar_pagu',$data);
+	 }
+
+	 function addpagumamin(){
+		 $data['daftar_unit_kerja'] = $this->db->get('unit_kerja')->result();
+		 $this->load->view('admin/vi_addpagumamin',$data);
+	 }
+
+	 function pagumaminsave(){
+		 if($this->input->post('save')){
+				 $datainsert = array('id_unit_kerja'=>$this->input->post('id_unit_kerja'),
+														 'nilai_pagu'=>$this->input->post('nilai_pagu'),
+														 'pagu_berjalan'=>$this->input->post('nilai_pagu'),
+														 'tahun_pagu'=>$this->input->post('tahun_pagu'),
+														 'created_by'=>$this->session->userdata('nama'),
+														 'creator_id'=>$this->session->userdata('id'),
+														 'keterangan'=>$this->input->post('keterangan')
+														 );
+
+				 if($this->db->insert('pagu_mamin',$datainsert)){
+					 $this->session->set_flashdata('state','success');
+					 $this->session->set_flashdata('msg','DATA TERSIMPAN');
+					 redirect('admin/pagumamin');
+				 }else{
+					 $this->session->set_flashdata('state','danger');
+					 $this->session->set_flashdata('msg','GAGAL MENYIMPAN');
+					 redirect('admin/addpagumamin');
+				 }
+			 }
+	 }
+
 }

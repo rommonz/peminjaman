@@ -25,10 +25,11 @@
                         <a href="<?php echo site_url('admin/pengguna')?>"> <i class="fa fa-users"></i>Daftar Pengguna</a>
                     </li>
                     <li class="<?php echo $this->uri->segment(2) == 'unitkerja' ? 'active' : '' ?>">
-                        <a href="<?php echo site_url('admin/unitkerja')?>"> <i class="fa fa-users"></i>Daftar Unit Kerja</a>
+                        <a href="<?php echo site_url('admin/unitkerja')?>"> <i class="fa fa-leaf"></i>Daftar Unit Kerja</a>
                     </li>
-
-
+                    <li class="<?php echo $this->uri->segment(2) == 'pagumamin' ? 'active' : '' ?>">
+                        <a href="<?php echo site_url('admin/pagumamin')?>"> <i class="fa fa-money"></i>Pagu Mamin</a>
+                    </li>
                   </ul>
                 </li>
               <!-- end master menu -->
@@ -74,10 +75,13 @@
                           <a href="<?php echo site_url('peralatanadmin/daftarjenispersediaan')?>"> <i class="fa fa-tags"></i>Jenis Persediaan</a>
                       </li>
                       <li class="<?php echo $this->uri->segment(2) == 'permohonanpersediaan' ? 'active' : '' ?>">
-                        <a href="<?php echo site_url('peralatanadmin/listpermohonan')?>"> <i class="fa fa-map-marker"></i>Permohonan</a>
+                        <a href="<?php echo site_url('peralatanadmin/listpermohonan')?>"> <i class="fa fa-map-marker"></i>Peralatan Kantor</a>
                       </li>
                       <li class="<?php echo $this->uri->segment(2) == 'daftarpersediaan' ? 'active' : '' ?>">
                         <a href="<?php echo site_url('peralatanadmin/daftarpersediaan')?>"> <i class="fa fa-map-marker"></i>Stok Barang</a>
+                      </li>
+                      <li class="<?php echo $this->uri->segment(2) == 'listmamin' ? 'active' : '' ?>">
+                        <a href="<?php echo site_url('mamin/listmamin')?>"> <i class="fa fa-map-marker"></i>Mamin</a>
                       </li>
                     </ul>
 
