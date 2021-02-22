@@ -8,9 +8,30 @@ class Pemeliharaan extends CI_Controller{
   }
 
   function menejpemeliharaan(){
-    $data['daftar_pemeliharaan'] = $this->pemeliharaan->get_list_all();
+
+    $data['daftar_pemeliharaan'] = $this->pemeliharaan->get_list_all($this->input->get('s'));
+    $data['pemeliharaan_status'] = $this->db->get('pemeliharaan_status')->result();
     $data['page_title'] = "Pemeliharaan Asset";
     $this->load->view('pemeliharaan/vi_menejpemeliharaan',$data);
+  }
+
+  function cetaktandaterima($id){
+    //insert ke log pemeliharaan
+    $created_at = date('Y-m-d H:i:s');
+    $this->insert_log($id, 'PROCESS');
+    $this->db->update('pemeliharaan',array('approval'=>'PROCESS'),array('id_pemeliharaan'=>$id));
+    $data['detail'] = $this->pemeliharaan->get_detail($id);
+    $data['created_at'] = $created_at;
+    $this->load->view('pemeliharaan/cetak_tanda_terima.php',$data);
+  }
+
+  function insert_log($id, $status){
+    $insert =  $this->db->insert('pemeliharaan_log',array('id_pemeliharaan'=>$id,
+                                                'status'=>$status,
+                                                'created_by'=>$this->session->userdata('nama'),
+                                                'created_at'=>date('Y-m-d H:i:s'),
+                                                'creator_id'=>$this->session->userdata('id')));
+      return $insert;
   }
 
   function proses(){

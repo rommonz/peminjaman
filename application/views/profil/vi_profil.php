@@ -55,6 +55,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                <div class="col col-md-3"><label for="nb" class=" form-control-label">Nama Pegawai</label></div>
                                <div class="col-12 col-md-9"><input type="text" id="nama_pengguna" value="<?php echo $profil->nama ?>" name="nama" placeholder="Nama Pegawai" class="form-control" required></div>
                           </div>
+                          <div class="row form-group">
+                               <div class="col col-md-3"><label for="nb" class=" form-control-label">Unit Kerja</label></div>
+                               <div class="col-12 col-md-9">
+                                 <input type="text" value="<?php echo $profil->nama_unit_kerja ?>" name="nama" placeholder="Nama Pegawai" class="form-control" required>
+                                 <span clas="text-color:red"><small >Untuk merubah unit kerja hubungi admin Pa.RT</small></span>
+                               </div>
+
+                          </div>
 
                           <div class="row form-group">
                                <div class="col col-md-3"><label for="merk" class=" form-control-label">Password</label></div>

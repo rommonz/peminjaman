@@ -20,14 +20,17 @@
 			);
 			$cek = $this->Mo_login->cek_login("tbl_login",$where)->num_rows();
 			if($cek > 0){
-				$datalogin = $this->Mo_login->cek_login("tbl_login",$where)->row();
-			$data_session = array(
-				'id' => $datalogin->id,
-				'username' => $datalogin->username,
-				'nama' => $datalogin->nama,
-				'role' =>$datalogin->role,
-				'status' => "login"
-				);
+				$login = $this->Mo_login->cek_login("tbl_login",$where)->row();
+				$datalogin = $this->Mo_login->get_pengguna_by_id($login->id);
+				$data_session = array(
+					'id' => $datalogin->id,
+					'username' => $datalogin->username,
+					'nama' => $datalogin->nama,
+					'id_unit_kerja'=>$datalogin->id_unit_kerja,
+					'unit_kerja'=>$datalogin->nama_unit_kerja,
+					'role' =>$datalogin->role,
+					'status' => "login"
+					);
 
 			$this->session->set_userdata($data_session);
 

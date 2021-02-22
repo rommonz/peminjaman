@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
                     <div class="header-left">
-                    <h3>Daftar Pengguna</h3>
+                    <h3><?php echo $this->judul ?></h3>
                     </div>
 				</div>
 			</div>
@@ -41,37 +41,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title">Daftar Pengguna</strong>
+                                    <strong class="card-title">Daftar pengajuan mamin</strong>
                                 </div>
-                                <div class="card-header">
-                                <a class="btn btn-primary btn-sm" href="<?php echo site_url('admin/addpengguna') ?>" ><i class="fa fa-pencil"></i> Add New</a>
+
+                              <div class="card-header">
+                                <div class="row form-group">
+                                <div class="col col-md-2"><label for="text-input" class=" form-control-label">Status</label></div>
+                                  <div class="col-md-8">
+                                    <select id="kegiatan" name="kegiatan" class="form-control">
+                                      <option></option>
+                                      <option>PENDING</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                  <a class="btn btn-primary" onclick="window.location.replace('<?php echo base_url('mamin/listmamin') ?>'+'?k='+$('#kegiatan').val())" >GO</a>
+                                </div>
                               </div>
+                              </div>
+                              <div class="card-header">
+                                <?php if(isset($_GET['k'])){ ?>
+                              <a class="btn btn-primary btn-sm" href="<?php echo site_url('mamin/pengajuan/?k='.$_GET['k']) ?>" ><i class="fa fa-pencil"></i> Add New</a>
+                            <?php } ?>
+                            </div>
 
                          <div class="card-body">
                           <table id="table-pengguna" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                <th>Nama</th>
-                                <th>Username</th>
-                                <th>Role</th>
-                                <th>Unit Kerja</th>
-                                <th>Action</th>
+                                <th>Pagu</th>
+                                <th>Kegiatan</th>
+                                <th>Lokasi</th>
+                                <th>Peserta (Jumlah)</th>
+                                <th>Nilai Pengajuan</th>
+                                <th>Keterangan</th>
+                                <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                     						<?php
-                    						foreach($daftar_pengguna as $peg){
+                    						foreach($daftar_pengajuan as $p){
                     						?>
                     						<tr>
-                                <td><?php echo $peg->nama ?></td>
-                    						<td><?php echo $peg->username ?></td>
-                                <td><?php echo $peg->role ?></td>
-                                <td><?php echo $peg->nama_unit_kerja ?></td>
+                                <td><?php echo $p->kegiatan ?></td>
+                                <td><?php echo $p->nama_kegiatan ?></td>
+                    						<td><?php echo $p->lokasi_kegiatan ?></td>
+                                <td><?php echo $p->peserta." (".$p->jumlah_peserta.")" ?></td>
+                                <td><?php echo number_format($p->nilai_pengajuan) ?></td>
+                                <td><?php echo $p->keterangan ?></td>
+                                <td><?php echo $p->approval ?>
                     						<td>
-                                  <a class="btn btn-warning btn-sm" href="<?php echo site_url('admin/editpengguna/'.$peg->id);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
-                                  <?php if($peg->role != 'SUPERADMIN') { ?>
-                                  <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $peg->id; ?>" onclick="confirm_modal('<?php echo site_url('admin/hapususer/'.$peg->id);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
-                                <?php } ?>
+
+                                  <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $p->id_mamin_pengajuan; ?>" onclick="prosesmamin(<?php echo $p->id_mamin_pengajuan ?>);" class="btn btn-small"><i class="fa fa-trash-o"></i>Proses </a>
                                 </td>
                     						</tr>
 
@@ -107,12 +128,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         							</div>
         						</div>
         						<script>
-            	function confirm_modal(delete_url,title)
+            	function prosesmamin(id_pengajuan)
             	{
             		jQuery('#modal_delete_m_n').modal('show', {backdrop: 'static',keyboard :false});
-            		jQuery("#modal_delete_m_n .grt").text(title);
-            		document.getElementById('delete_link_m_n').setAttribute("href" , delete_url );
-            		document.getElementById('delete_link_m_n').focus();
+                jQuery.post('<?php echo base_url('maminadmin/proses_pengajuan') ?>',{'id_pengajuan':id_pengajuan})
+                .done(function(data){
+                  jQuery("#tabeldetail").html(data);
+                })
+                //jQuery("#modal_delete_m_n .grt").text(title);
+            		//document.getElementById('delete_link_m_n').setAttribute("href" , delete_url );
+            		//document.getElementById('delete_link_m_n').focus();
             	}
             	</script>
               <?php $this->load->view('foot') ?>

@@ -48,9 +48,9 @@
         <tr>
           <td width="50%">
             <br/>
-            Pengurus Barang,
+            Admin,
             <br/><br/><br/>
-            ...............
+            <?php echo $this->session->userdata('nama') ?>
           </td>
           <td>
             Bogor,       <br/>

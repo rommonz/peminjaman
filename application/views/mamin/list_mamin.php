@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-plus"></i></a>
                     <div class="header-left">
-                    <h3>Pengajuan Makan Minum</h3>
+                    <h3><?php echo $this->judul ?></h3>
                     </div>
 				</div>
 			</div>
@@ -41,33 +41,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title">Daftar pengajuan makan minum</strong>
+                                    <strong class="card-title">Daftar pengajuan <?php echo $this->session->userdata['unit_kerja'] ?></strong>
                                 </div>
-                                <div class="card-header">
-                                <a class="btn btn-primary btn-sm" href="<?php echo site_url('admin/addpagumamin') ?>" ><i class="fa fa-pencil"></i> Add New</a>
+
+                              <div class="card-header">
+                                <div class="row form-group">
+                                <div class="col col-md-2"><label for="text-input" class=" form-control-label">Kegiatan</label></div>
+                                  <div class="col-md-8">
+                                    <select id="kegiatan" name="kegiatan" class="form-control">
+                                      <option></option>
+                                      <?php foreach($daftar_kegiatan as $keg){ ?>
+                                        <option <?php echo  isset($_GET['k']) == $keg->id_pagu ? 'Selected' : '' ?> value="<?php echo $keg->id_pagu ?>"><?php echo $keg->kegiatan ?></option>
+                                      <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                  <a class="btn btn-primary" onclick="window.location.replace('<?php echo base_url('mamin/listmamin') ?>'+'?k='+$('#kegiatan').val())" >GO</a>
+                                </div>
                               </div>
+                              </div>
+                              <div class="card-header">
+                                <?php if(isset($_GET['k'])){ ?>
+                              <a class="btn btn-primary btn-sm" href="<?php echo site_url('mamin/pengajuan/?k='.$_GET['k']) ?>" ><i class="fa fa-pencil"></i> Add New</a>
+                            <?php } ?>
+                            </div>
 
                          <div class="card-body">
                           <table id="table-pengguna" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                <th>Unit Kerja</th>
-                                <th>Nilai Pagu</th>
-                                <th>Tahun Pagu</th>
+                                <th>Sub Kegiatan</th>
+                                <th>Lokasi</th>
+                                <th>Peserta (Jumlah)</th>
+                                <th>Nilai Pengajuan</th>
                                 <th>Keterangan</th>
+                                <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                     						<?php
-                    						foreach($daftar_pagu as $p){
+
+                    						foreach($daftar_mamin as $p){
                     						?>
                     						<tr>
-                                <td><?php echo $p->nama_unit_kerja ?></td>
-                    						<td style="text-align:right;"><?php echo number_format($p->nilai_pagu) ?></td>
-                                <td><?php echo $p->tahun_pagu ?></td>
+                                <td><?php echo $p->nama_kegiatan ?></td>
+                    						<td><?php echo $p->lokasi_kegiatan ?></td>
+                                <td><?php echo $p->peserta." (".$p->jumlah_peserta.")" ?></td>
+                                <td><?php echo number_format($p->nilai_pengajuan) ?></td>
+                                <td><?php echo $p->keterangan ?></td>
+                                <td><?php echo $p->approval ?>
                     						<td>
-                                  <a class="btn btn-warning btn-sm" href="<?php echo site_url('admin/editpagu/'.$p->id_unit_kerja);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
-                                  <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $p->id_pagu; ?>" onclick="confirm_modal('<?php echo site_url('admin/hapuspagumamin/'.$p->id_pagu);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
+                                  <a class="btn btn-warning btn-sm" href="<?php echo site_url('mamin/editpengajuan/'.$p->id_mamin_pengajuan);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
+                                  <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $p->id_mamin_pengajuan; ?>" onclick="confirm_modal('<?php echo site_url('mamin/hapuspengajuan/'.$p->id_mamin_pengajuan);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
                                 </td>
                     						</tr>
 

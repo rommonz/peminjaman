@@ -14,7 +14,7 @@ class Mo_pemeliharaan extends CI_Model{
   function get_list_all($where = NULL){
     $sql = "select * from pemeliharaan p ";
     if(isset($where)){
-      $sql .= $where;
+      $sql .= " where approval like '".$where."' ";
     }
     return $this->db->query($sql)->result();
   }

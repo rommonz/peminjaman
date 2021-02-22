@@ -80,8 +80,8 @@
                       <li class="<?php echo $this->uri->segment(2) == 'daftarpersediaan' ? 'active' : '' ?>">
                         <a href="<?php echo site_url('peralatanadmin/daftarpersediaan')?>"> <i class="fa fa-map-marker"></i>Stok Barang</a>
                       </li>
-                      <li class="<?php echo $this->uri->segment(2) == 'listmamin' ? 'active' : '' ?>">
-                        <a href="<?php echo site_url('mamin/listmamin')?>"> <i class="fa fa-map-marker"></i>Mamin</a>
+                      <li class="<?php echo $this->uri->segment(2) == 'daftar_pengajuan' ? 'active' : '' ?>">
+                        <a href="<?php echo site_url('maminadmin/daftar_pengajuan')?>"> <i class="fa fa-map-marker"></i>Mamin</a>
                       </li>
                     </ul>
 
@@ -102,8 +102,8 @@
                 <li class="<?php echo $this->uri->segment(2) == 'transaksi' ? 'active' : '' ?>">
                     <a href="<?php echo site_url('asset/rkbmd')?>"> <i class="menu-icon fa fa-barcode"></i>RKBMD</a>
                 </li>
-                <li class="<?php echo $this->uri->segment(2) == 'transaksi' ? 'active' : '' ?>">
-                    <a href="<?php echo site_url('asset/rkbmd')?>"> <i class="menu-icon fa fa-cutlery"></i>Pengajuan Mamin</a>
+                <li class="<?php echo $this->uri->segment(2) == 'listmamin' ? 'active' : '' ?>">
+                    <a href="<?php echo site_url('mamin/listmamin')?>"> <i class="menu-icon fa fa-cutlery"></i>Pengajuan Mamin</a>
                 </li>
                 <!-- li class="<?php echo $this->uri->segment(2) == 'kelaporan' ? 'active' : '' ?>">
                     <a href="< ?php echo site_url('Laporanbarang/kelaporan')?>"> <i class="menu-icon fa fa-print"></i>Laporan Peminjaman</a>

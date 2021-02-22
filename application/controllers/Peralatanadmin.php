@@ -178,7 +178,7 @@ class Peralatanadmin extends CI_Controller{
     $data['transaksi'] = $this->persediaan->get_transaksi($id_transaksi);
     $data['detail'] = $this->persediaan->get_transaksi_detail($id_transaksi);
 
-    $this->load->view('peralatan/cetak_permohonan',$data);
+    $this->load->view('peralatanadmin/cetak_permohonan',$data);
   }
 
 

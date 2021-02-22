@@ -6,8 +6,18 @@ class Mo_login extends CI_Model{
 	}
 
   function get_pengguna(){
-    return $this->db->get('tbl_login')->result();
-  }
+
+		$sql = "select * from tbl_login l left join unit_kerja uk on uk.id_unit_kerja = l.id_unit_kerja";
+
+		return $this->db->query($sql)->result();
+	}
+
+	function get_pengguna_by_id($id){
+
+		$sql = "select * from tbl_login l left join unit_kerja uk on uk.id_unit_kerja = l.id_unit_kerja where l.id = ".$id;
+
+		return $this->db->query($sql)->row();
+	}
 
 	function update_pengguna($where,$data)
 	{

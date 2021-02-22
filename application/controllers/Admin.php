@@ -22,7 +22,8 @@ class Admin extends CI_Controller{
   }
 
   public function addpengguna(){
-    $this->load->view('admin/vi_addpengguna');
+		$data['daftar_unit_kerja'] = $this->db->get('unit_kerja')->result();
+    $this->load->view('admin/vi_addpengguna',$data);
   }
 
   function penggunasave(){
@@ -57,16 +58,19 @@ class Admin extends CI_Controller{
   public function editpengguna($id){
 		$data['pengguna'] = $this->db->get_where('tbl_login',array('id'=>$id))->row();
 		$data['roles'] = $this->db->get('role')->result();
+		$data['daftar_unit_kerja'] = $this->db->get('unit_kerja')->result();
     $this->load->view('admin/vi_editpengguna',$data);
   }
 
 	public function penggunaupdate(){
 
 		$datapost['nama'] = $this->input->post('nama');
+
 		if($this->input->post('password') != '' ){
 			$datapost['password'] = $this->input->post('password');
 		}
 		$datapost['role'] = $this->input->post('role');
+		$datapost['id_unit_kerja'] = $this->input->post('id_unit_kerja');
 		$where = Array('id'=>$this->input->post('id'));
 
 		if($this->db->update('tbl_login',$datapost, $where)){
@@ -133,6 +137,7 @@ class Admin extends CI_Controller{
 	 function pagumaminsave(){
 		 if($this->input->post('save')){
 				 $datainsert = array('id_unit_kerja'=>$this->input->post('id_unit_kerja'),
+				 											'kegiatan'=>$this->input->post('nama_kegiatan'),
 														 'nilai_pagu'=>$this->input->post('nilai_pagu'),
 														 'pagu_berjalan'=>$this->input->post('nilai_pagu'),
 														 'tahun_pagu'=>$this->input->post('tahun_pagu'),
@@ -151,6 +156,50 @@ class Admin extends CI_Controller{
 					 redirect('admin/addpagumamin');
 				 }
 			 }
+	 }
+
+	 function editpagu($id_pagu){
+
+		 $data['pagu'] = $this->db->get_where('pagu_mamin',array('id_pagu'=>$id_pagu))->row();
+		 $data['daftar_unit_kerja'] = $this->db->get('unit_kerja')->result();
+		 //print_r($data);exit;
+		 $this->load->view('admin/vi_editpagumamin',$data);
+
+	 }
+
+	 function updatepagu(){
+		 if($this->input->post('update')){
+				$dataupdate = array('id_unit_kerja'=>$this->input->post('id_unit_kerja'),
+														 'kegiatan'=>$this->input->post('nama_kegiatan'),
+														'nilai_pagu'=>$this->input->post('nilai_pagu'),
+														'pagu_berjalan'=>$this->input->post('nilai_pagu'),
+														'tahun_pagu'=>$this->input->post('tahun_pagu'),
+														'created_by'=>$this->session->userdata('nama'),
+														'creator_id'=>$this->session->userdata('id'),
+														'keterangan'=>$this->input->post('keterangan')
+														);
+
+				if($this->db->update('pagu_mamin',$dataupdate,array('id_pagu'=>$this->input->post('id_pagu')))){
+					$this->session->set_flashdata('state','success');
+					$this->session->set_flashdata('msg','DATA TERSIMPAN');
+					redirect('admin/pagumamin');
+				}else{
+					$this->session->set_flashdata('state','danger');
+					$this->session->set_flashdata('msg','GAGAL MENYIMPAN');
+					redirect('admin/editpagu/'.$this->input->post('id_pagu'));
+				}
+			}
+	 }
+
+	 function hapuspagumamin(){
+
+		 $del = $this->db->delete('pagu_mamin',array('id_pagu'=>$this->input->post('id_pagu')));
+		 if($del){
+			 echo 'SUCCESS';
+		 }else{
+			 echo 'FAILED';
+		 }
+
 	 }
 
 }

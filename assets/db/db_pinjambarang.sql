@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2021 at 02:22 AM
+-- Generation Time: Feb 23, 2021 at 12:20 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -88,6 +88,62 @@ INSERT INTO `calendar` (`id`, `title`, `description`, `start_date`, `end_date`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mamin_pengajuan`
+--
+
+CREATE TABLE `mamin_pengajuan` (
+  `id_mamin_pengajuan` int(11) NOT NULL,
+  `id_pagu` int(11) DEFAULT NULL,
+  `nama_kegiatan` varchar(45) DEFAULT NULL,
+  `lokasi_kegiatan` varchar(45) DEFAULT NULL,
+  `peserta` varchar(45) DEFAULT NULL,
+  `jumlah_peserta` int(11) DEFAULT NULL,
+  `nilai_pengajuan` double DEFAULT NULL,
+  `created_by` varchar(45) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `creator_id` int(11) DEFAULT NULL,
+  `keterangan` varchar(45) DEFAULT NULL,
+  `approval` varchar(45) DEFAULT NULL,
+  `tgl_approval` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mamin_pengajuan`
+--
+
+INSERT INTO `mamin_pengajuan` (`id_mamin_pengajuan`, `id_pagu`, `nama_kegiatan`, `lokasi_kegiatan`, `peserta`, `jumlah_peserta`, `nilai_pengajuan`, `created_by`, `created_at`, `creator_id`, `keterangan`, `approval`, `tgl_approval`) VALUES
+(1, 4, 'rapat', 'dinkes', 'struktural', 50, 5000000, 'ahmad', '2021-02-14 18:20:32', 7, '-', 'PENDING', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pagu_mamin`
+--
+
+CREATE TABLE `pagu_mamin` (
+  `id_pagu` int(11) NOT NULL,
+  `id_unit_kerja` int(11) DEFAULT NULL,
+  `kegiatan` varchar(45) DEFAULT NULL,
+  `nilai_pagu` double DEFAULT NULL,
+  `pagu_berjalan` double DEFAULT NULL,
+  `tahun_pagu` varchar(4) DEFAULT NULL,
+  `created_by` varchar(45) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `creator_id` int(11) DEFAULT NULL,
+  `keterangan` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pagu_mamin`
+--
+
+INSERT INTO `pagu_mamin` (`id_pagu`, `id_unit_kerja`, `kegiatan`, `nilai_pagu`, `pagu_berjalan`, `tahun_pagu`, `created_by`, `created_at`, `creator_id`, `keterangan`) VALUES
+(1, 3, 'Pengelolaan Rumah Tangga', 200000000, 200000000, '2021', 'vicky', '0000-00-00 00:00:00', 1, NULL),
+(4, 4, 'kegiatan penyusunan pelaporan', 200000000, 200000000, '2021', 'vicky', '0000-00-00 00:00:00', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pemeliharaan`
 --
 
@@ -99,7 +155,7 @@ CREATE TABLE `pemeliharaan` (
   `created_by` varchar(45) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `creator_id` int(11) DEFAULT NULL,
-  `approval` enum('PENDING','APPROVED','REJECTED') DEFAULT 'PENDING',
+  `approval` varchar(45) DEFAULT 'PENDING',
   `modified_by` varchar(45) DEFAULT NULL,
   `modified_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -109,11 +165,59 @@ CREATE TABLE `pemeliharaan` (
 --
 
 INSERT INTO `pemeliharaan` (`id_pemeliharaan`, `kode_barang`, `nama_barang`, `keterangan`, `created_by`, `created_at`, `creator_id`, `approval`, `modified_by`, `modified_at`) VALUES
-(2, '321123', 'laptop updated', 'ngehang terus', 'Vicky Vitriandi, S.Komp', '2021-01-03 16:55:07', 2, 'APPROVED', 'Admin', '2021-01-03 12:04:00'),
-(4, '1234', 'motor', 'ganti oli', 'Admin', '2021-01-03 18:04:25', 1, 'PENDING', NULL, NULL),
-(5, '35345345', 'mobil', 'ganti ban', 'rudi', '2021-01-03 18:16:11', 3, 'PENDING', NULL, NULL),
-(6, 'asd', 'asdasd', 'adad', 'Admin', '2021-01-28 06:01:38', 1, 'PENDING', NULL, NULL),
+(2, '321123', 'laptop updated', 'ngehang terus', 'Vicky Vitriandi, S.Komp', '2021-01-03 16:55:07', 2, 'PROCESS', 'Admin', '2021-01-03 12:04:00'),
+(5, '35345345', 'mobil', 'ganti ban', 'rudi', '2021-01-03 18:16:11', 3, 'RECEIVEDBYADMIN', NULL, NULL),
+(6, 'asd', 'AC split', 'ruang kabid ', 'Admin', '2021-01-28 06:01:38', 1, 'PENDING', 'vicky', '2021-02-07 02:27:29'),
 (8, '-', 'AC Split', 'ac kurang dingin', 'ahmad', '2021-01-31 22:07:12', 7, 'PENDING', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pemeliharaan_log`
+--
+
+CREATE TABLE `pemeliharaan_log` (
+  `id_pemeliharaan_log` int(11) NOT NULL,
+  `id_pemeliharaan` int(11) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `created_by` varchar(45) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `creator_id` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pemeliharaan_log`
+--
+
+INSERT INTO `pemeliharaan_log` (`id_pemeliharaan_log`, `id_pemeliharaan`, `status`, `created_by`, `created_at`, `creator_id`) VALUES
+(12, 2, 'PROCESS', 'vicky', '2021-02-22 23:43:59', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pemeliharaan_status`
+--
+
+CREATE TABLE `pemeliharaan_status` (
+  `id_pemeliharaan_status` int(11) NOT NULL,
+  `status` varchar(45) NOT NULL,
+  `keterangan` varchar(100) NOT NULL,
+  `user` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pemeliharaan_status`
+--
+
+INSERT INTO `pemeliharaan_status` (`id_pemeliharaan_status`, `status`, `keterangan`, `user`) VALUES
+(1, 'DRAFT', 'permohonan pemeliharaan dibuat', 'USER'),
+(2, 'PENDING', 'permohonan pemeliharaan telah di kirim dan menunggu persetujuaan admin', 'USER'),
+(3, 'APPROVED', 'Permohonan Pemeliharaan disetujui dan menunggu untuk pengambilan/penyerahan barang', 'ADMIN'),
+(4, 'REJECTED', 'Permohonan ditolak', 'ADMIN'),
+(5, 'PROCESS', 'Barang telah diterima admin dan di proses pemeliharaan', 'ADMIN'),
+(6, 'READYFORDELIVER', 'Pemeliharaan telah selesai, barang siap di antar/diambil', 'ADMIN'),
+(7, 'CANNOTBEFIXED', 'Barang rusak parah tidak dapat diperbaiki', 'ADMIN'),
+(8, 'COMPLETED', 'Proses pemeliharaan selesai', 'USER');
 
 -- --------------------------------------------------------
 
@@ -221,7 +325,8 @@ CREATE TABLE `persediaan_transaksi` (
 INSERT INTO `persediaan_transaksi` (`id_persediaan_transaksi`, `jenis_transaksi`, `tgl_transaksi`, `id_user`, `keterangan`, `status_transaksi`, `tgl_approval`, `tgl_diterima`) VALUES
 (1, 'KELUAR', '2021-01-20 13:26:03', 1, 'umum dan kepegawaian', 'APPROVED', '2021-01-31 15:12:57', NULL),
 (2, 'KELUAR', '2021-01-22 06:17:35', 1, 'keterangan', 'APPROVED', '2021-01-31 15:13:41', NULL),
-(3, 'KELUAR', '2021-01-31 21:49:33', 7, 'Seksi Anu', 'PENDING', NULL, NULL);
+(3, 'KELUAR', '2021-01-31 21:49:33', 7, 'Seksi Anu', 'PENDING', NULL, NULL),
+(4, 'KELUAR', '2021-02-06 06:36:07', 1, 'februari', 'DRAFT', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -271,6 +376,32 @@ CREATE TABLE `pinjam_ruangan` (
 
 INSERT INTO `pinjam_ruangan` (`id_pinjam_ruangan`, `id_ruangan`, `tgl_pinjam`, `lama_pinjam`, `id_peminjam`, `tujuan`, `approval`) VALUES
 (1, 1, '2020-12-07', 1, 2, 'Sosialisasi', 'PENDING');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rkbmd`
+--
+
+CREATE TABLE `rkbmd` (
+  `id_rkbmd` int(11) NOT NULL,
+  `nama_barang` varchar(45) DEFAULT NULL,
+  `spesifikasi` varchar(100) DEFAULT NULL,
+  `jumlah_barang` int(11) DEFAULT NULL,
+  `harga_satuan` varchar(45) DEFAULT NULL,
+  `created_by` varchar(45) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `creator_id` int(11) DEFAULT NULL,
+  `approval` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rkbmd`
+--
+
+INSERT INTO `rkbmd` (`id_rkbmd`, `nama_barang`, `spesifikasi`, `jumlah_barang`, `harga_satuan`, `created_by`, `created_at`, `creator_id`, `approval`) VALUES
+(1, 'Laptop', '14", i7', 1, '20000000', 'vicky', '2021-02-07 14:47:30', 1, 'PENDING'),
+(2, 'Komputer', 'ALL IN ONE PC', 1, '25000000', 'Subag Perencanaan dan Pelaporan', '2021-02-07 15:32:44', 9, 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -348,19 +479,21 @@ CREATE TABLE `tbl_login` (
   `username` varchar(8) NOT NULL,
   `password` varchar(10) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
-  `role` varchar(45) NOT NULL DEFAULT 'PENGGUNA'
+  `role` varchar(45) NOT NULL DEFAULT 'PENGGUNA',
+  `id_unit_kerja` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_login`
 --
 
-INSERT INTO `tbl_login` (`id`, `username`, `password`, `nama`, `role`) VALUES
-(1, 'admin', 'adminadmin', 'vicky', 'SUPERADMIN'),
-(2, 'rommonz', '12345', 'Vicky Vitriandi, S.Komp', 'ADMINRUANG'),
-(3, '19850618', 'rudi', 'rudi', 'PENGGUNA'),
-(7, 'gie', 'ahmad', 'ahmad', 'USER'),
-(8, 'gege', 'gege', 'gege', 'ADMINRUANG');
+INSERT INTO `tbl_login` (`id`, `username`, `password`, `nama`, `role`, `id_unit_kerja`) VALUES
+(1, 'admin', 'adminadmin', 'vicky', 'SUPERADMIN', NULL),
+(2, 'rommonz', '12345', 'Vicky Vitriandi, S.Komp', 'ADMINRUANG', NULL),
+(3, '19850618', 'rudi', 'rudi', 'PENGGUNA', NULL),
+(7, 'gie', 'ahmad', 'ahmad', 'USER', 4),
+(8, 'gege', 'gege', 'gege', 'ADMINRUANG', NULL),
+(9, 'renlap', 'renlap123', 'user renlap', 'USER', NULL);
 
 -- --------------------------------------------------------
 
@@ -385,6 +518,29 @@ CREATE TABLE `tbl_pinjambarang` (
 INSERT INTO `tbl_pinjambarang` (`id_pb`, `no_pb`, `no_spt`, `tanggal`, `nama1`, `nama2`, `tujuan`) VALUES
 (7, '1', 'asdasd', '2020-12-21', 'adasd', 'asdads', 'asdasd');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `unit_kerja`
+--
+
+CREATE TABLE `unit_kerja` (
+  `id_unit_kerja` int(11) NOT NULL,
+  `nama_unit_kerja` varchar(45) DEFAULT NULL,
+  `id_ordinat` int(11) DEFAULT NULL,
+  `keterangan` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `unit_kerja`
+--
+
+INSERT INTO `unit_kerja` (`id_unit_kerja`, `nama_unit_kerja`, `id_ordinat`, `keterangan`) VALUES
+(1, 'Dinas Kesehatan Kota Bogor', 0, 'dinas'),
+(2, 'Sekretariat Dinas Kesehatan', 1, 'Sekretariat'),
+(3, 'Subag Umum dan Kepegawaian', 2, '-'),
+(4, 'Subag Perencanaan dan Pelaporan', 2, '-');
+
 --
 -- Indexes for dumped tables
 --
@@ -403,10 +559,34 @@ ALTER TABLE `calendar`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `mamin_pengajuan`
+--
+ALTER TABLE `mamin_pengajuan`
+  ADD PRIMARY KEY (`id_mamin_pengajuan`);
+
+--
+-- Indexes for table `pagu_mamin`
+--
+ALTER TABLE `pagu_mamin`
+  ADD PRIMARY KEY (`id_pagu`);
+
+--
 -- Indexes for table `pemeliharaan`
 --
 ALTER TABLE `pemeliharaan`
   ADD PRIMARY KEY (`id_pemeliharaan`);
+
+--
+-- Indexes for table `pemeliharaan_log`
+--
+ALTER TABLE `pemeliharaan_log`
+  ADD PRIMARY KEY (`id_pemeliharaan_log`);
+
+--
+-- Indexes for table `pemeliharaan_status`
+--
+ALTER TABLE `pemeliharaan_status`
+  ADD PRIMARY KEY (`id_pemeliharaan_status`);
 
 --
 -- Indexes for table `persediaan`
@@ -445,6 +625,12 @@ ALTER TABLE `pinjam_ruangan`
   ADD PRIMARY KEY (`id_pinjam_ruangan`);
 
 --
+-- Indexes for table `rkbmd`
+--
+ALTER TABLE `rkbmd`
+  ADD PRIMARY KEY (`id_rkbmd`);
+
+--
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
@@ -480,6 +666,12 @@ ALTER TABLE `tbl_pinjambarang`
   ADD KEY `no_spt` (`no_spt`);
 
 --
+-- Indexes for table `unit_kerja`
+--
+ALTER TABLE `unit_kerja`
+  ADD PRIMARY KEY (`id_unit_kerja`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -494,10 +686,30 @@ ALTER TABLE `barang`
 ALTER TABLE `calendar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
+-- AUTO_INCREMENT for table `mamin_pengajuan`
+--
+ALTER TABLE `mamin_pengajuan`
+  MODIFY `id_mamin_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `pagu_mamin`
+--
+ALTER TABLE `pagu_mamin`
+  MODIFY `id_pagu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `pemeliharaan`
 --
 ALTER TABLE `pemeliharaan`
   MODIFY `id_pemeliharaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `pemeliharaan_log`
+--
+ALTER TABLE `pemeliharaan_log`
+  MODIFY `id_pemeliharaan_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `pemeliharaan_status`
+--
+ALTER TABLE `pemeliharaan_status`
+  MODIFY `id_pemeliharaan_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `persediaan`
 --
@@ -517,7 +729,7 @@ ALTER TABLE `persediaan_jenis`
 -- AUTO_INCREMENT for table `persediaan_transaksi`
 --
 ALTER TABLE `persediaan_transaksi`
-  MODIFY `id_persediaan_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_persediaan_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `persediaan_transaksi_detail`
 --
@@ -528,6 +740,11 @@ ALTER TABLE `persediaan_transaksi_detail`
 --
 ALTER TABLE `pinjam_ruangan`
   MODIFY `id_pinjam_ruangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `rkbmd`
+--
+ALTER TABLE `rkbmd`
+  MODIFY `id_rkbmd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `role`
 --
@@ -542,12 +759,17 @@ ALTER TABLE `ruangan`
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tbl_pinjambarang`
 --
 ALTER TABLE `tbl_pinjambarang`
   MODIFY `id_pb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `unit_kerja`
+--
+ALTER TABLE `unit_kerja`
+  MODIFY `id_unit_kerja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --

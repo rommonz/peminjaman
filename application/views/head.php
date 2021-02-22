@@ -6,8 +6,8 @@ $this->session->userdata('nama') ? $user = $this->session->userdata('nama'):redi
 <script type="text/javascript"></script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Peminjaman Barang</title>
-<meta name="description" content="Peminjaman Barang - Dinas Kesehatan Kota Bogor">
+<title>[Pa.RT] - Dinkes</title>
+<meta name="description" content="[Pa.RT] - Dinas Kesehatan Kota Bogor">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="shortcut icon" href="<?php echo base_url('assets/images/kujangkotabogor.png')?>">

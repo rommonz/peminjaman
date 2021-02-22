@@ -80,7 +80,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
                           </div>
 
-                          <div class="row form-group">
+                          <div class="row form-group"> <!--dibuat dropdown-->
+                            <div class="col col-md-3">
+                               <label class="form-control-label" for="kb">Unit Kerja</label>
+                            </div>
+                               <div class="col-12 col-md-9">
+                                    <select id="id_unit_kerja" class="form-control" name="id_unit_kerja">
+                                    <option value="0">Pilih</option>
+                                    <?php foreach($daftar_unit_kerja as $uk) { ?>
+                                      <option value="<?php echo $uk->id_unit_kerja ?>"><?php echo $uk->nama_unit_kerja ?></option>
+                                    <?php } ?>
+                                    </select>
+                                </div>
                           </div>
 
                       </div>

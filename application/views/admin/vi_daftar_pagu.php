@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <thead>
                                 <tr>
                                 <th>Unit Kerja</th>
+                                <th>Kegiatan</th>
                                 <th>Nilai Pagu</th>
                                 <th>Tahun Pagu</th>
                                 <th>Keterangan</th>
@@ -63,11 +64,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     						?>
                     						<tr>
                                 <td><?php echo $p->nama_unit_kerja ?></td>
-                    						<td style="text-align:right;"><?php echo number_format($p->nilai_pagu) ?></td>
+                                <td><?php echo $p->kegiatan ?></td>
+                                <td style="text-align:right;"><?php echo number_format($p->nilai_pagu) ?></td>
                                 <td><?php echo $p->tahun_pagu ?></td>
                     						<td>
-                                  <a class="btn btn-warning btn-sm" href="<?php echo site_url('admin/editpagu/'.$p->id_unit_kerja);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
-                                  <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $p->id_pagu; ?>" onclick="confirm_modal('<?php echo site_url('admin/hapuspagumamin/'.$p->id_pagu);?>','Title');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
+                                  <a class="btn btn-warning btn-sm" href="<?php echo site_url('admin/editpagu/'.$p->id_pagu);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
+                                  <a class="btn btn-danger btn-sm"   onclick="hapus(<?php echo $p->id_pagu ;?>)" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
                                 </td>
                     						</tr>
 
@@ -103,6 +105,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         							</div>
         						</div>
         						<script>
+
+              function hapus(id_pagu){
+
+                c = confirm("apakah ada yakin menghapus data ini ? "+id_pagu);
+                if(c){
+                  jQuery.post('<?php echo base_url('admin/hapuspagumamin') ?>',{'id_pagu':id_pagu})
+                  .done(function(res){
+                    if(res == 'SUCCESS'){
+                      window.location.reload();
+                    }else{
+                      alert('Data Gagal dihapus');
+                    }
+                  });
+                }
+              }
+
             	function confirm_modal(delete_url,title)
             	{
             		jQuery('#modal_delete_m_n').modal('show', {backdrop: 'static',keyboard :false});
