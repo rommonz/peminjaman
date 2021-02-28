@@ -85,8 +85,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<td><?php echo $r->created_by."<br/>".$r->created_at ?></td>
 						<td class=""><?php echo $r->approval ?></td>
             <td>
-              <a class="btn btn-warning btn-sm" href="<?php echo site_url('assetadmin/edit/'.$r->id_rkbmd);?>"class="btn btn-small"><i class="fa fa-edit"></i>Edit</a>
-              <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticModal<?php echo $r->id_rkbmd; ?>" onclick="confirm_modal('<?php echo site_url('assetadmin/hapus/'.$r->id_rkbmd);?>','hapus');" class="btn btn-small"><i class="fa fa-trash-o"></i>Hapus</a>
+              <?php if($r->approval == 'PENDING'): ?>
+                <a class="btn btn-warning btn-sm"
+                    data-toggle="modal"
+                    data-target="#accModal<?php echo $r->id_rkbmd; ?>"
+                    onclick="confirm_modal('<?php echo $r->id_rkbmd;?>');"
+                    class="btn btn-small">
+                    <i class="fa fa-check"></i>Proses
+                </a>
+              <?php endif; ?>
 						</td>
 						</tr>
 
@@ -106,19 +113,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticModalLabel">Konfirmasi Hapus</h5>
+          <h5 class="modal-title" id="staticModalLabel">Konfirmasi</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <p>
-          Yakin ingin menghapus ini?
+          Setujui Permohonan RKBMD ?
           </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-          <a type="button" class="btn btn-primary" id="delete_link_m_n">Ya, Hapus</a>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+          <a type="button" class="btn btn-primary"  onclick="proses('APPROVED')" id="btnProsesApproved">Ya, Setujui</a>
+          <a type="button" class="btn btn-danger" onclick="proses('REJECTED')" id="btnProsesRejected">Tolak</a>
         </div>
       </div>
     </div>
@@ -134,12 +142,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </script>
 
 						<script>
-            function confirm_modal(delete_url,title)
+            function confirm_modal(id)
             {
               jQuery('#modal_delete_m_n').modal('show', {backdrop: 'static',keyboard :false});
-              jQuery("#modal_delete_m_n .grt").text(title);
-              document.getElementById('delete_link_m_n').setAttribute("href" , delete_url );
-              document.getElementById('delete_link_m_n').focus();
+              jQuery("#btnProsesApproved").attr('idnya',id);
+              jQuery("#btnProsesRejected").attr('idnya',id);
+            }
+
+            function proses(status){
+              var id;
+              if(status == 'APPROVED'){
+                id = jQuery("#btnProsesApproved").attr('idnya');
+              }else{
+                id = jQuery("#btnProsesRejected").attr('idnya');
+              }
+              $.post('<?php echo base_url('assetadmin/proses/') ?>',{id : id, status:status})
+                .done(function(data){
+                    if(data == 'SUCCESS'){
+                    
+                      window.location.reload();
+                    }
+                })
+
             }
 
 

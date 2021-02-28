@@ -34,18 +34,26 @@ class Admin extends CI_Controller{
 														'nama'=>$this->input->post('nama_lengkap'),
 														'role'=>$this->input->post('role')
 														);
-			if($this->mo_login->check_duplicate_username($this->input->post('username'))){
-					if($this->mo_login->simpan_pengguna($datainsert)){
-						//set flash message
-						$this->session->set_flashdata('state','success');
-			      $this->session->set_flashdata('msg','Pengguna baru tersimpan');
+			$check = $this->mo_login->check_duplicate_username($this->input->post('username'));
 
-						redirect('admin/pengguna');
-					}
+			if($check){
+				echo "false";exit;
+				if($this->mo_login->simpan_pengguna($datainsert)){
+					//set flash message
+					$this->session->set_flashdata('state','success');
+					$this->session->set_flashdata('msg','Pengguna baru tersimpan');
+
+					redirect('admin/pengguna');
+				}else{
+					$this->session->set_flashdata('state','danger');
+					$this->session->set_flashdata('msg','Gagal Menyimpan');
+						redirect('admin/addpengguna','refresh');
+				}
+
 			}else{
 				//set flash gagal
 				$this->session->set_flashdata('state','danger');
-	      $this->session->set_flashdata('msg','username sudah digunakan, silahkan gunakan username lain');
+				$this->session->set_flashdata('msg','username sudah digunakan, silahkan gunakan username lain');
 
 				redirect('admin/addpengguna','refresh');
 			}
@@ -87,7 +95,7 @@ class Admin extends CI_Controller{
 
 	public function unitkerja(){
 		//$data['daftar_unitkerja'] = $this->db->get('unit_kerja')->result();
-		$sql = "select uk.*, uk2.nama_unit_kerja as ordinat from unit_kerja uk left join unit_kerja uk2 on uk2.id_unit_kerja = uk.id_ordinat";
+		$sql = "select uk.*, uk2.nama_unit_kerja as ordinat from unit_kerja uk left join unit_kerja uk2 on uk2.id_unit_kerja = uk.id_ordinat order by id_ordinat ASC";
 		$data['daftar_unitkerja'] = $this->db->query($sql)->result();
 		$this->load->view('admin/vi_daftar_unitkerja',$data);
 
@@ -115,6 +123,43 @@ class Admin extends CI_Controller{
 					redirect('admin/unitkerja');
 				}
 			}
+	}
+
+	function editunitkerja($id_unit_kerja){
+		$this->db->where('id_unit_kerja',$id_unit_kerja);
+		$data['unit'] = $this->db->get('unit_kerja')->row();
+		$data['daftar_unitkerja'] = $this->db->get('unit_kerja')->result();
+		$this->load->view('admin/vi_editunitkerja',$data);
+	}
+
+	function unitkerjaupdate(){
+		$dataupdate = array('nama_unit_kerja'=>$this->input->post('nama_unit_kerja'),
+												'id_ordinat'=>$this->input->post('id_ordinat'),
+												'keterangan'=>$this->input->post('keterangan')
+												);
+		if($this->db->update('unit_kerja',$dataupdate, array('id_unit_kerja'=>$this->input->post('id_unit_kerja')))){
+			$this->session->set_flashdata('state','success');
+			$this->session->set_flashdata('msg','DATA TERSIMPAN');
+			redirect('admin/unitkerja');
+		}else{
+			$this->session->set_flashdata('state','danger');
+			$this->session->set_flashdata('msg','GAGAL MENYIMPAN');
+			redirect('admin/unitkerja');
+		}
+	}
+
+	function hapusunitkerja($id_unit_kerja){
+
+		$del = $this->db->delete('unit_kerja',array('id_unit_kerja'=>$id_unit_kerja));
+		if($del){
+			$this->session->set_flashdata('state','success');
+			$this->session->set_flashdata('msg','Data Berhasil dihapus');
+			redirect('admin/unitkerja');
+		}else{
+			$this->session->set_flashdata('state','danger');
+			$this->session->set_flashdata('msg','GAGAL Menghapus');
+			redirect('admin/unitkerja');
+		}
 	}
 
 

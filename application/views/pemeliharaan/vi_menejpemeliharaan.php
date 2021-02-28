@@ -218,9 +218,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         function confirm_modal(id)
                         {
                           jQuery('#modal_acc').modal('show', {backdrop: 'static',keyboard :false});
-                          //jQuery("#modal_delete_m_n .grt").text(title);
-                          //document.getElementById('delete_link_m_n').setAttribute("href" , delete_url );
-                          //document.getElementById('delete_link_m_n').focus();
+                          
                           jQuery("#btnProsesApproved").attr('idnya',id);
                           jQuery("#btnProsesRejected").attr('idnya',id);
                         }

@@ -19,4 +19,9 @@ class Mo_rkbmd extends CI_Model{
       return $this->db->insert($this->_table,$data);
   }
 
+  function update_status($status, $id){
+    $sql = "update rkbmd set approval = '".$status."' where id_rkbmd = '".$id."' ";
+    return $this->db->query($sql);
+  }
+
 }

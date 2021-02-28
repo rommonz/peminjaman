@@ -14,4 +14,23 @@ Class Assetadmin extends CI_Controller{
     $this->load->view('assetadmin/list_rkbmd',$data);
 
   }
+
+  function proses(){
+		$id = $this->input->post('id');
+		$status = $this->input->post('status');
+
+
+		if($this->rkbmd->update_status($status, $id)){
+      $this->session->set_flashdata('state','success');
+      $this->session->set_flashdata('msg','Perubahan berhasil disimpan..');
+			echo "SUCCESS";
+		}else{
+      $this->session->set_flashdata('state','danger');
+      $this->session->set_flashdata('msg','Perubahan gagal disimpan..');
+			echo "FAILED";
+		}
+
+	}
+
+
 }
