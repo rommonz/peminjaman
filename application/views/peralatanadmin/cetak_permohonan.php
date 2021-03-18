@@ -1,10 +1,10 @@
 <html>
   <header>
-    <title>Cetak Permohonan Barang Persediaan</title>
+    <title>Cetak Tanda terima Barang Persediaan</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css')?>">
   </header>
   <body>
-    <h4>Form Permohonan Barang Persediaan</h4>
+    <h4>Form Tanda Terima Barang Persediaan</h4>
     <hr/>
     <br/>
     <div class="row">
@@ -27,8 +27,7 @@
           <th>No</th>
           <th>Jenis Barang</th>
           <th>Nama Barang</th>
-          <th>Jumlah Permintaan</th>
-          <th>Jumlah Disetujui</th>
+          <th>Jumlah</th>
         </tr>
       </thead>
       <tbody>
@@ -37,7 +36,6 @@
           <td><?php echo $x++ ?></td>
           <td><?php echo $d->jenis_persediaan ?></td>
           <td><?php echo $d->nama_persediaan ?></td>
-          <td><?php echo $d->jumlah_permintaan ?></td>
           <td><?php echo $d->jumlah_disetujui ?></td>
         </tr>
       <?php  } ?>

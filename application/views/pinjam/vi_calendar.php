@@ -76,10 +76,24 @@
                       <!-- end place -->
                     </div>
                 </div>
+                <div class="card-footer">
+                  <div class="row">
+                    <div class="col-md-4 well">
+                      <table>
+                        <tr><td>Keterangan warna:</td></tr>
+                        <tr><td style="background-color:GREEN">&nbsp;Disetujui</td></tr>
+                        <tr><td style="background-color:YELLOW">&nbsp;Pending</td></tr>
+                        <tr><td style="background-color:RED">&nbsp;Ditolak</td></tr>
+                        <tr><td style="background-color:GREY">&nbsp;Dibatalkan</td></tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
 
 
     </div>
+
 </div>
 </div>
 </div>

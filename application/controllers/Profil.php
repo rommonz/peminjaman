@@ -9,9 +9,9 @@ class Profil extends CI_Controller{
 
   function editprofil(){
     $this->db->where('id',$this->session->userdata('id'));
-    $this->db->join('unit_kerja','unit_kerja.id_unit_kerja = tbl_login.id_unit_kerja');
+    $this->db->join('unit_kerja','unit_kerja.id_unit_kerja = tbl_login.id_unit_kerja','left');
     $data['profil'] = $this->db->get('tbl_login')->row();
-    
+
     $this->load->view('profil/vi_profil',$data);
   }
 

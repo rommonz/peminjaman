@@ -5,6 +5,7 @@ class Peralatan extends CI_Controller{
   function __construct(){
     parent::__construct();
     $this->load->model('Mo_persediaan','persediaan');
+
   }
 
 
@@ -94,6 +95,17 @@ class Peralatan extends CI_Controller{
 
     public function transaksi_ajukan(){
       $dataupdate = array('status_transaksi'=>'PENDING');
+      $id_persediaan_transaksi = $this->input->post('id_persediaan_transaksi');
+      if($this->db->update('persediaan_transaksi',$dataupdate,array('id_persediaan_transaksi'=>$id_persediaan_transaksi))){
+        echo "SUCCESS";
+      }else{
+        echo "FAILED";
+      }
+
+    }
+
+    public function transaksi_selesai(){
+      $dataupdate = array('status_transaksi'=>'COMPLETE','tgl_diterima'=>date('Y-m-d H:i:s'));
       $id_persediaan_transaksi = $this->input->post('id_persediaan_transaksi');
       if($this->db->update('persediaan_transaksi',$dataupdate,array('id_persediaan_transaksi'=>$id_persediaan_transaksi))){
         echo "SUCCESS";

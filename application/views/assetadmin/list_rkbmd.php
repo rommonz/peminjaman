@@ -48,9 +48,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col-md-3">
                               <select id="status" class="form-control">
                                 <option value="ALL">ALL</option>
-                                <option <?php echo $_GET['s'] == 'PENDING' ? 'selected' : '' ?> value="PENDING">PENDING</option>
-                                <option <?php echo $_GET['s'] == 'APPROVED' ? 'selected' : '' ?> value="APPROVED">APPROVED</option>
-                                <option <?php echo $_GET['s'] == 'REJECTED' ? 'selected' : '' ?> value="REJECTED">REJECTED</option>
+                                <option <?php echo  isset($_GET['s']) and $_GET['s'] == 'PENDING' ? 'selected' : '' ?> value="PENDING">PENDING</option>
+                                <option <?php echo isset($_GET['s']) and $_GET['s'] == 'APPROVED' ? 'selected' : '' ?> value="APPROVED">APPROVED</option>
+                                <option <?php echo isset($_GET['s']) and $_GET['s'] == 'REJECTED' ? 'selected' : '' ?> value="REJECTED">REJECTED</option>
                               </select>
                           </div>
                           <div class="col-md-2">
@@ -159,7 +159,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               $.post('<?php echo base_url('assetadmin/proses/') ?>',{id : id, status:status})
                 .done(function(data){
                     if(data == 'SUCCESS'){
-                    
+
                       window.location.reload();
                     }
                 })

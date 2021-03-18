@@ -47,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <thead>
                         <tr>
                           <th>Pemohon</th>
-                          <th>Tgl Permintaan</th>
+                          <th><?php echo $transaksi->status_transaksi == 'PENDING' ? 'Tgl Permintaan' : ($transaksi->status_transaksi == 'APPROVED' ? 'Tgl Disetujui' : 'Tgl Diterima') ?> </th>
                           <th>Keterangan</th>
                           <th>Status Transaksi</th>
                           <!-- th>Action</th -->
@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr>
 
 						<td><?php echo $transaksi->nama ?></td>
-            <td><?php echo $transaksi->tgl_transaksi ?></td>
+            <td><?php echo $transaksi->status_transaksi == 'PENDING' ? $transaksi->tgl_transaksi : ($transaksi->status_transaksi == 'APPROVED' ? $transaksi->tgl_approval : $transaksi->tgl_diterima) ?></td>
 						<td><?php echo $transaksi->keterangan ?></td>
             <td><?php echo $transaksi->status_transaksi ?></td>
 						<!--td>
@@ -72,9 +72,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="card-footer">
           <btn class="btn btn-warning btn-sm" onclick="window.history.back()" ><i class="fa fa-arrow-circle-left"></i> Kembali</btn>
           <?php if($transaksi->status_transaksi == 'DRAFT'){ ?>
-          <btn class="btn btn-primary btn-sm" onclick="(ajukan(<?php echo $transaksi->id_persediaan_transaksi ?>))" ><i class="fa fa-arrow-circle-right"></i> Ajukan</btn>
-        <?php } ?>
+          <btn class="btn btn-success btn-sm" onclick="(ajukan(<?php echo $transaksi->id_persediaan_transaksi ?>))" ><i class="fa fa-arrow-circle-right"></i> Ajukan</btn>
+        <?php }elseif($transaksi->status_transaksi == 'APPROVED'){ ?>
+          <btn class="btn btn-success btn-sm" onclick="(selesai(<?php echo $transaksi->id_persediaan_transaksi ?>))" ><i class="fa fa-check-circle"></i> Barang telah diterima</btn>
           <btn class="btn btn-primary btn-sm" onclick="(cetak(<?php echo $transaksi->id_persediaan_transaksi ?>))" ><i class="fa fa-arrow-circle-right"></i> Cetak Form Permintaan</btn>
+        <?php } ?>
         </div>
 				</div>
 			</div>
@@ -223,6 +225,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         })
     }
   }
+
+
+  function selesai(id_transaksi){
+    var r = confirm("Barang Persediaan telah diterima ? ");
+    if (r == true) {
+      jQuery.post('<?php echo base_url('peralatan/transaksi_selesai') ?>',{'id_persediaan_transaksi':id_transaksi})
+        .done(function(respon){
+          if(respon == 'SUCCESS'){
+              alert('Transaksi berhasil');
+          }else{
+            alert('Transaksi gagal');
+          }
+
+          window.location.reload();
+        })
+    }
+  }
+
 
   function cetak(id_transaksi){
     var w = window.open('<?php echo base_url('peralatan/cetakpermohonan/') ?>'+id_transaksi, 'thePopup', 'width=800,height=800');

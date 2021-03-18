@@ -74,11 +74,11 @@
                       <li class="<?php echo $this->uri->segment(2) == 'daftarjenispersediaan' ? 'active' : '' ?>">
                           <a href="<?php echo site_url('peralatanadmin/daftarjenispersediaan')?>"> <i class="fa fa-tags"></i>Jenis Persediaan</a>
                       </li>
-                      <li class="<?php echo $this->uri->segment(2) == 'permohonanpersediaan' ? 'active' : '' ?>">
-                        <a href="<?php echo site_url('peralatanadmin/listpermohonan')?>"> <i class="fa fa-map-marker"></i>Peralatan Kantor</a>
-                      </li>
                       <li class="<?php echo $this->uri->segment(2) == 'daftarpersediaan' ? 'active' : '' ?>">
                         <a href="<?php echo site_url('peralatanadmin/daftarpersediaan')?>"> <i class="fa fa-map-marker"></i>Stok Barang</a>
+                      </li>
+                      <li class="<?php echo $this->uri->segment(2) == 'permohonanpersediaan' ? 'active' : '' ?>">
+                        <a href="<?php echo site_url('peralatanadmin/listpermohonan')?>"> <i class="fa fa-map-marker"></i>Permohonan Peralatan</a>
                       </li>
                       <li class="<?php echo $this->uri->segment(2) == 'daftar_pengajuan' ? 'active' : '' ?>">
                         <a href="<?php echo site_url('maminadmin/daftar_pengajuan')?>"> <i class="fa fa-map-marker"></i>Mamin</a>
